@@ -43,34 +43,39 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen" style={{ fontFamily: 'Inter, sans-serif' }}>
+    <div className="min-h-screen bg-white" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
       <style>
         {`
           :root {
-            --bg-primary: #F5F0E8;
-            --bg-secondary: #EDE8DE;
-            --bg-dark: #1A1714;
-            --text-primary: #1A1714;
-            --text-secondary: #6B6560;
-            --text-muted: #A8A09A;
-            --accent: #C4972A;
-            --accent-dark: #A07E22;
-            --border: #D9D3C7;
+            --teal-primary: #16b6bb;
+            --teal-dark: #008086;
+            --teal-light: #befcfe;
+            --red-accent: #891f00;
+            --bg: #ffffff;
+            --bg-soft: #f4fefe;
+            --bg-muted: #eaf9f9;
+            --text-primary: #0d2b2c;
+            --text-secondary: #3d6b6c;
+            --text-muted: #7aa8a9;
+            --border: #cceced;
           }
         `}
       </style>
 
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-sm" style={{ backgroundColor: 'rgba(245, 240, 232, 0.95)', borderColor: 'var(--border)' }}>
-        <div className="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
-          <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontWeight: 'bold', color: 'var(--text-primary)', letterSpacing: '0.3em', fontSize: '0.875rem' }}>
-            POLARAXIS
+      <nav className="sticky top-0 bg-white border-b z-50" style={{ borderColor: '#cceced' }}>
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center">
+            <div className="w-7 h-7 rounded-sm" style={{ backgroundColor: '#16b6bb' }} />
+            <span className="ml-2 font-semibold text-lg" style={{ color: '#0d2b2c' }}>PolarAxis</span>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3">
             <ThemeToggle />
             <button
               onClick={() => navigate('/login')}
-              style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.875rem', letterSpacing: '0.05em', color: 'var(--text-secondary)', transition: 'color 0.3s' }}
-              className="hover:text-[#1A1714]"
+              className="px-5 py-2 rounded-lg text-sm font-medium transition-colors"
+              style={{ backgroundColor: '#16b6bb', color: 'white' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#008086'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#16b6bb'}
             >
               Sign In
             </button>
@@ -78,370 +83,353 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <section className="relative min-h-screen flex items-center overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
-        <div className="absolute rounded-full border opacity-60" style={{ width: '600px', height: '600px', borderColor: 'var(--border)', top: '-8rem', right: '-8rem' }} />
-        <div className="absolute rounded-full border opacity-60" style={{ width: '400px', height: '400px', borderColor: 'var(--border)', top: '-4rem', right: '-4rem' }} />
-        <div className="absolute rounded-full opacity-30" style={{ width: '2rem', height: '2rem', backgroundColor: 'var(--accent)', bottom: '8rem', left: '4rem' }} />
+      <section className="bg-white pt-20 pb-24 px-6">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="inline-block mb-6 px-4 py-1.5 rounded-full text-xs font-medium border"
+            style={{ backgroundColor: '#eaf9f9', color: '#008086', borderColor: '#cceced' }}
+          >
+            Pharmaceutical Cold Chain Platform
+          </motion.div>
 
-        <div className="max-w-6xl mx-auto px-8 pt-32 pb-20 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="font-bold leading-tight mb-6"
+            style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: '#0d2b2c' }}
+          >
+            Ship pharmaceuticals with{' '}
+            <span style={{ color: '#16b6bb' }}>temperature certainty.</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="font-normal text-lg leading-relaxed mb-10 max-w-2xl mx-auto"
+            style={{ color: '#3d6b6c' }}
+          >
+            Real-time cold chain monitoring, AI-powered routing, and automated compliance for global pharmaceutical logistics.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="flex gap-3 justify-center"
+          >
+            <button
+              onClick={() => navigate('/login')}
+              className="px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors shadow-sm"
+              style={{ backgroundColor: '#16b6bb', color: 'white' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#008086'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#16b6bb'}
             >
-              <div className="mb-8 flex items-center">
-                <div className="inline-block align-middle mr-3 border-t" style={{ width: '2rem', borderColor: 'var(--accent)' }} />
-                <span style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', letterSpacing: '0.2em', color: 'var(--accent)' }}>
-                  PHARMACEUTICAL COLD CHAIN
-                </span>
-              </div>
-
-              <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(3rem, 6vw, 5.5rem)', lineHeight: '1.05', color: 'var(--text-primary)' }}>
-                Temperature<br />
-                <span style={{ fontStyle: 'italic' }}>Certain.</span><br />
-                Globally<br />
-                <span style={{ fontStyle: 'italic' }}>Delivered.</span>
-              </h1>
-
-              <p className="mt-8 mb-12" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1.125rem', lineHeight: '1.75', color: 'var(--text-secondary)', maxWidth: '28rem' }}>
-                Enterprise cold-chain logistics for pharmaceutical companies. Real-time monitoring, AI-powered routing, compliance automation.
-              </p>
-
-              <div className="flex gap-4">
-                <button
-                  onClick={() => navigate('/login')}
-                  className="px-8 py-4 transition-all duration-300"
-                  style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.875rem', letterSpacing: '0.05em', backgroundColor: 'var(--bg-dark)', color: 'var(--bg-primary)' }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--accent)'}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-dark)'}
-                >
-                  Enter Platform
-                </button>
-                <button
-                  onClick={() => navigate('/login')}
-                  className="px-8 py-4 border bg-transparent transition-all duration-300"
-                  style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.875rem', letterSpacing: '0.05em', borderColor: 'var(--border)', color: 'var(--text-secondary)' }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--text-primary)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
-                >
-                  Request Demo
-                </button>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-              className="border p-8"
-              style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-secondary)' }}
+              Get Started
+            </button>
+            <button
+              onClick={() => navigate('/login')}
+              className="px-7 py-3.5 rounded-lg font-medium text-sm bg-white border transition-colors"
+              style={{ borderColor: '#cceced', color: '#3d6b6c' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#16b6bb';
+                e.currentTarget.style.color = '#0d2b2c';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#cceced';
+                e.currentTarget.style.color = '#3d6b6c';
+              }}
             >
-              <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', color: 'var(--text-muted)', letterSpacing: '0.15em' }}>
-                LIVE TELEMETRY SNAPSHOT
-              </div>
-              <div className="border-t my-4" style={{ borderColor: 'var(--border)' }} />
+              Request a Demo
+            </button>
+          </motion.div>
 
-              {[
-                { id: 'PX-2024-0891', status: 'IN TRANSIT', temp: '4.2°C', statusBg: 'var(--bg-dark)', statusText: 'var(--bg-primary)', tempColor: 'var(--accent)' },
-                { id: 'PX-2024-0887', status: 'IN TRANSIT', temp: '-68.4°C', statusBg: 'var(--bg-dark)', statusText: 'var(--bg-primary)', tempColor: 'var(--accent)' },
-                { id: 'PX-2024-0876', status: 'EXCURSION', temp: '-17.1°C', statusBg: '#7f1d1d', statusText: 'white', tempColor: '#b91c1c' }
-              ].map((shipment, i) => (
-                <div key={i} className="flex justify-between items-center py-3 border-b" style={{ borderColor: 'rgba(217, 211, 199, 0.5)' }}>
-                  <span style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', color: 'var(--text-primary)' }}>
-                    {shipment.id}
-                  </span>
-                  <span className="px-2 py-0.5" style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', backgroundColor: shipment.statusBg, color: shipment.statusText }}>
-                    {shipment.status}
-                  </span>
-                  <span style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.875rem', color: shipment.tempColor }}>
-                    {shipment.temp}
-                  </span>
-                </div>
-              ))}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-16 border rounded-2xl overflow-hidden shadow-xl max-w-4xl mx-auto"
+            style={{ borderColor: '#cceced', boxShadow: '0 20px 60px rgba(22, 182, 187, 0.1)' }}
+          >
+            <div className="px-4 py-3 border-b flex items-center gap-2" style={{ backgroundColor: '#eaf9f9', borderColor: '#cceced' }}>
+              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#891f00' }} />
+              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#16b6bb' }} />
+              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#008086' }} />
+              <span className="ml-3 text-xs" style={{ color: '#3d6b6c' }}>PolarAxis Control Tower</span>
+            </div>
 
-              <div className="mt-6 pt-4 border-t grid grid-cols-2 gap-4" style={{ borderColor: 'var(--border)' }}>
-                <div>
-                  <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
-                    99.8%
+            <div className="p-6 grid grid-cols-4 gap-4" style={{ backgroundColor: '#f4fefe' }}>
+              <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
+                <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>247</div>
+                <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Active Shipments</div>
+              </div>
+              <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
+                <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#16b6bb' }}>99.8%</div>
+                <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Temp Compliance</div>
+              </div>
+              <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
+                <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>14</div>
+                <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Countries</div>
+              </div>
+              <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
+                <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#891f00' }}>2</div>
+                <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Excursions</div>
+              </div>
+
+              <div className="col-span-4 bg-white border rounded-lg overflow-hidden" style={{ borderColor: '#cceced' }}>
+                <div className="px-4 py-2 grid grid-cols-5 gap-2 text-xs font-medium uppercase tracking-wide" style={{ backgroundColor: '#eaf9f9', color: '#7aa8a9' }}>
+                  <div>Shipment ID</div>
+                  <div>Route</div>
+                  <div>Status</div>
+                  <div>Temp</div>
+                  <div>Risk</div>
+                </div>
+                <div className="px-4 py-3 border-t grid grid-cols-5 gap-2 text-xs" style={{ borderColor: '#cceced' }}>
+                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>PX-2024-0891</div>
+                  <div style={{ color: '#3d6b6c' }}>AMS → BOM</div>
+                  <div>
+                    <span className="px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: '#eaf9f9', color: '#008086' }}>
+                      In Transit
+                    </span>
                   </div>
-                  <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    Temp Compliance
+                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#16b6bb' }}>4.2°C</div>
+                  <div>
+                    <span className="px-2 py-0.5 rounded-full text-xs bg-green-50 text-green-700">Low</span>
                   </div>
                 </div>
-                <div>
-                  <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
-                    247
+                <div className="px-4 py-3 border-t grid grid-cols-5 gap-2 text-xs" style={{ borderColor: '#cceced' }}>
+                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>PX-2024-0887</div>
+                  <div style={{ color: '#3d6b6c' }}>JFK → SIN</div>
+                  <div>
+                    <span className="px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: '#eaf9f9', color: '#008086' }}>
+                      In Transit
+                    </span>
                   </div>
-                  <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    Active Shipments
+                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#16b6bb' }}>-68.4°C</div>
+                  <div>
+                    <span className="px-2 py-0.5 rounded-full text-xs bg-green-50 text-green-700">Low</span>
+                  </div>
+                </div>
+                <div className="px-4 py-3 border-t grid grid-cols-5 gap-2 text-xs" style={{ borderColor: '#cceced' }}>
+                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>PX-2024-0876</div>
+                  <div style={{ color: '#3d6b6c' }}>CDG → KUL</div>
+                  <div>
+                    <span className="px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: 'rgba(137, 31, 0, 0.1)', color: '#891f00' }}>
+                      Excursion
+                    </span>
+                  </div>
+                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#891f00' }}>-17.1°C</div>
+                  <div>
+                    <span className="px-2 py-0.5 rounded-full text-xs bg-red-50 text-red-700">High</span>
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-16" style={{ backgroundColor: 'var(--bg-dark)' }}>
-        <div className="max-w-6xl mx-auto px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4">
-            {[
-              { value: stats.shipments, label: 'ACTIVE SHIPMENTS' },
-              { value: `${stats.compliance}%`, label: 'TEMP COMPLIANCE' },
-              { value: stats.countries, label: 'COUNTRIES' },
-              { value: stats.tempClasses, label: 'TEMP CLASSES' }
-            ].map((stat, i) => (
-              <div key={i} className="text-center px-8" style={{ borderRight: i < 3 ? '1px solid rgba(255,255,255,0.1)' : 'none' }}>
-                <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '3rem', fontWeight: 'bold', color: 'var(--bg-primary)' }}>
-                  {stat.value}
-                </div>
-                <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: '0.75rem' }}>
-                  {stat.label}
-                </div>
+      <section className="py-14" style={{ backgroundColor: '#16b6bb' }}>
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4">
+          {[
+            { value: stats.shipments, label: 'ACTIVE SHIPMENTS' },
+            { value: `${stats.compliance}%`, label: 'TEMP COMPLIANCE' },
+            { value: stats.countries, label: 'COUNTRIES COVERED' },
+            { value: stats.tempClasses, label: 'TEMP CLASSES' }
+          ].map((stat, i) => (
+            <div
+              key={i}
+              className="text-center px-8"
+              style={{ borderRight: i < 3 ? '1px solid rgba(255,255,255,0.2)' : 'none' }}
+            >
+              <div className="font-bold text-5xl text-white" style={{ fontFamily: 'JetBrains Mono, monospace' }}>
+                {stat.value}
               </div>
+              <div className="text-xs mt-2 uppercase tracking-wide" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: '-60px' }}
+            className="text-center mb-14"
+          >
+            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#008086' }}>
+              Why it matters
+            </div>
+            <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#0d2b2c' }}>
+              Cold chain failure is costly.
+            </h2>
+            <p className="text-base max-w-xl mx-auto" style={{ color: '#3d6b6c' }}>
+              Pharmaceutical logistics needs specialized control
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              {
+                icon: Thermometer,
+                iconBg: 'rgba(137, 31, 0, 0.1)',
+                iconColor: '#891f00',
+                stat: '$35B',
+                title: 'Temperature Excursions',
+                desc: 'Annual losses from cold chain failures globally'
+              },
+              {
+                icon: Clock,
+                iconBg: 'rgba(22, 182, 187, 0.1)',
+                iconColor: '#16b6bb',
+                stat: '47%',
+                title: 'Delayed Shipments',
+                desc: 'Face unexpected customs or carrier delays'
+              },
+              {
+                icon: Database,
+                iconBg: 'rgba(13, 43, 44, 0.1)',
+                iconColor: '#0d2b2c',
+                stat: '12+',
+                title: 'Disconnected Systems',
+                desc: 'Average tools per pharmaceutical supply chain'
+              },
+              {
+                icon: FileX,
+                iconBg: 'rgba(137, 31, 0, 0.1)',
+                iconColor: '#891f00',
+                stat: '1 in 5',
+                title: 'Compliance Failures',
+                desc: 'Shipments missing proper regulatory documentation'
+              }
+            ].map((card, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                viewport={{ once: true, margin: '-60px' }}
+                className="border rounded-xl p-6 hover:shadow-md transition-all duration-200"
+                style={{ backgroundColor: '#f4fefe', borderColor: '#cceced' }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'rgba(22, 182, 187, 0.4)'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = '#cceced'}
+              >
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: card.iconBg }}>
+                  <card.icon className="w-5 h-5" style={{ color: card.iconColor }} />
+                </div>
+                <div className="font-bold text-3xl mb-2" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>
+                  {card.stat}
+                </div>
+                <div className="font-semibold text-sm mb-2" style={{ color: '#0d2b2c' }}>
+                  {card.title}
+                </div>
+                <div className="text-xs leading-relaxed" style={{ color: '#7aa8a9' }}>
+                  {card.desc}
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-40 px-8" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <section className="py-20 px-6" style={{ backgroundColor: '#f4fefe' }}>
         <div className="max-w-5xl mx-auto">
-          <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', letterSpacing: '0.3em', color: 'var(--accent)', marginBottom: '6rem' }}>
-            OUR PHILOSOPHY
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: '-60px' }}
+            className="text-center mb-14"
+          >
+            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#008086' }}>
+              How it works
+            </div>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#0d2b2c' }}>
+              From order to delivery,{' '}
+              <span style={{ color: '#16b6bb' }}>in four steps.</span>
+            </h2>
+          </motion.div>
 
-          {[
-            { text: 'Everything is data.', italic: true, align: 'left', indent: false, desc: 'Temperature readings, route conditions, carrier performance — every signal is an opportunity to act faster, smarter.' },
-            { text: ['Cold chain failure ', <span key="1" style={{ fontStyle: 'italic', color: 'var(--accent)' }}>is not an option.</span>], italic: false, align: 'left', indent: true, desc: 'A 2°C deviation destroys months of research. We monitor every degree, every minute, worldwide.' },
-            { text: ['Compliance is the floor, ', <br key="br1" />, 'not the ceiling.'], italic: true, align: 'right', indent: false, desc: 'Regulatory requirements are the baseline. PolarAxis builds everything above it — predictive risk, proactive rerouting, zero surprises.' },
-            { text: ['Talent is global. ', <br key="br2" />, <span key="2" style={{ fontStyle: 'italic', color: 'var(--accent)' }}>Cold chain should be too.</span>], italic: false, align: 'center', indent: false, desc: 'From major pharma hubs to emerging markets, we bring pharmaceutical-grade logistics everywhere.' }
-          ].map((block, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: '-80px' }}
-              className="mb-28"
-              style={{
-                paddingLeft: block.indent ? 'clamp(4rem, 10vw, 10rem)' : '0',
-                textAlign: block.align
-              }}
-            >
-              <div style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                lineHeight: '1.1',
-                color: 'var(--text-primary)',
-                fontStyle: block.italic ? 'italic' : 'normal',
-                marginBottom: '1.5rem'
-              }}>
-                {block.text}
-              </div>
+          <div className="grid md:grid-cols-4 gap-8 mt-14">
+            {[
+              {
+                num: '01',
+                title: 'Procure',
+                desc: 'Browse certified suppliers with defined temperature specs and quality guarantees'
+              },
+              {
+                num: '02',
+                title: 'Route',
+                desc: 'AI selects the optimal route by cost, risk, speed, and carbon footprint'
+              },
+              {
+                num: '03',
+                title: 'Monitor',
+                desc: 'Real-time temperature telemetry with instant excursion alerts'
+              },
+              {
+                num: '04',
+                title: 'Certify',
+                desc: 'Auto-generated compliance docs and full audit trail for any regulator'
+              }
+            ].map((step, i) => (
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                viewport={{ once: true }}
-                style={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontWeight: 300,
-                  fontSize: '1.125rem',
-                  color: 'var(--text-secondary)',
-                  maxWidth: '36rem',
-                  marginTop: '1.5rem',
-                  marginLeft: block.align === 'right' ? 'auto' : block.align === 'center' ? 'auto' : '0',
-                  marginRight: block.align === 'right' ? '0' : block.align === 'center' ? 'auto' : 'auto'
-                }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                viewport={{ once: true, margin: '-60px' }}
+                className="flex flex-col items-center text-center relative"
               >
-                {block.desc}
-              </motion.div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      <section className="py-32 px-8" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-        <div className="max-w-4xl mx-auto mb-4">
-          <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 3rem)', fontStyle: 'italic', color: 'var(--text-primary)' }}>
-            The cost of getting it wrong
-          </h2>
-        </div>
-        <div className="max-w-4xl mx-auto mb-20">
-          <p style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, color: 'var(--text-secondary)' }}>
-            Why pharmaceutical logistics needs specialized control
-          </p>
-        </div>
-
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{ backgroundColor: 'var(--border)', gap: '1px' }}>
-          {[
-            { stat: '$35B', title: 'ANNUAL LOSSES', desc: 'From temperature excursions globally', color: '#b91c1c' },
-            { stat: '47%', title: 'DELAYED SHIPMENTS', desc: 'Face unexpected customs delays', color: '#b45309' },
-            { stat: '12+', title: 'SYSTEMS', desc: 'Average tools per pharma supply chain', color: 'var(--bg-dark)' },
-            { stat: '1 in 5', title: 'COMPLIANCE FAILURES', desc: 'Shipments lack proper docs', color: 'var(--text-secondary)' }
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
-              viewport={{ once: true, margin: '-80px' }}
-              className="p-10 transition-colors"
-              style={{ backgroundColor: 'var(--bg-secondary)' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-primary)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
-            >
-              <div style={{ height: '2px', width: '100%', backgroundColor: card.color, marginBottom: '1.5rem' }} />
-              <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '3.75rem', fontWeight: 'bold', color: 'var(--text-primary)', margin: '1.5rem 0' }}>
-                {card.stat}
-              </div>
-              <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', color: 'var(--text-secondary)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-                {card.title}
-              </div>
-              <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.875rem', color: 'var(--text-muted)', fontWeight: 300, lineHeight: '1.75' }}>
-                {card.desc}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      <section className="py-32 px-8" style={{ backgroundColor: 'var(--bg-primary)' }}>
-        <div className="max-w-6xl mx-auto">
-          <h2 className="mb-16" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 3rem)', fontStyle: 'italic', color: 'var(--text-primary)' }}>
-            Four steps to certainty
-          </h2>
-
-          {[
-            {
-              step: '01',
-              title: 'Procure',
-              desc: 'Browse certified suppliers, request materials with defined temperature specifications and SLA guarantees.',
-              visual: (
-                <div className="grid grid-cols-4 grid-rows-3 gap-2">
-                  {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="border" style={{ width: '1.25rem', height: '1.25rem', borderColor: 'var(--border)', backgroundColor: i % 3 === 0 ? 'var(--bg-dark)' : 'transparent' }} />
-                  ))}
+                <div className="w-10 h-10 rounded-full text-white font-bold text-sm flex items-center justify-center relative z-10 mb-4" style={{ backgroundColor: '#16b6bb' }}>
+                  {step.num}
                 </div>
-              )
-            },
-            {
-              step: '02',
-              title: 'Route',
-              desc: 'AI compares cost, risk, transit time, and carbon footprint across all available transport modes.',
-              visual: (
-                <div className="space-y-3">
-                  {[
-                    { label: 'AIR', width: '100%', bg: 'var(--bg-dark)', duration: '2.1d' },
-                    { label: 'SEA', width: '75%', bg: 'var(--text-secondary)', duration: '18d' },
-                    { label: 'ROAD', width: '50%', bg: 'var(--text-muted)', duration: '6d' }
-                  ].map((mode, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <span style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', color: 'var(--text-primary)', width: '3rem' }}>
-                        {mode.label}
-                      </span>
-                      <div style={{ width: mode.width, height: '6px', backgroundColor: mode.bg }} />
-                      <span style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                        {mode.duration}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )
-            },
-            {
-              step: '03',
-              title: 'Monitor',
-              desc: 'Real-time telemetry every 15 minutes with instant excursion alerts and predictive risk scoring.',
-              visual: (
-                <svg width="200" height="60" viewBox="0 0 200 60">
-                  <line x1="0" y1="20" x2="200" y2="20" stroke="var(--border)" strokeDasharray="4 4" strokeWidth="1" />
-                  <line x1="0" y1="40" x2="200" y2="40" stroke="var(--border)" strokeDasharray="4 4" strokeWidth="1" />
-                  <polyline
-                    points="0,30 20,28 40,32 60,29 80,31 100,35 120,48 140,50 160,38 180,30 200,31"
-                    stroke="var(--accent)"
-                    strokeWidth="1.5"
-                    fill="none"
-                  />
-                </svg>
-              )
-            },
-            {
-              step: '04',
-              title: 'Certify',
-              desc: 'Automated compliance dossiers and audit trails accepted by any regulatory body worldwide.',
-              visual: (
-                <div className="relative" style={{ width: '8rem' }}>
-                  {[0, 1, 2].map((i) => (
-                    <div
-                      key={i}
-                      className="absolute border"
-                      style={{
-                        width: '8rem',
-                        height: '10rem',
-                        borderColor: 'var(--border)',
-                        backgroundColor: 'var(--bg-secondary)',
-                        top: `${i * 8}px`,
-                        left: `${i * 8}px`
-                      }}
-                    >
-                      {i === 0 && (
-                        <>
-                          <div className="absolute top-2 left-2 right-2 border-b" style={{ borderColor: 'var(--border)', height: '2px' }} />
-                          <div className="absolute top-4 left-2 right-2 border-b" style={{ borderColor: 'var(--border)', height: '2px' }} />
-                          <div className="absolute top-6 left-2 right-2 border-b" style={{ borderColor: 'var(--border)', height: '2px' }} />
-                          <div className="absolute top-8 left-2 right-2 border-b" style={{ borderColor: 'var(--border)', height: '2px' }} />
-                          <div className="absolute bottom-4 right-4" style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '1.5rem', color: 'var(--accent)' }}>
-                            ✓
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )
-            }
-          ].map((step, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
-              viewport={{ once: true, margin: '-80px' }}
-              className="flex items-center gap-16 min-h-[200px] border-b py-16"
-              style={{
-                flexDirection: i % 2 === 0 ? 'row' : 'row-reverse',
-                borderColor: 'var(--border)'
-              }}
-            >
-              <div className="flex-1">
-                <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', color: 'var(--accent)', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>
-                  STEP {step.step}
-                </div>
-                <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.875rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>
+                <div className="font-semibold text-base mb-2" style={{ color: '#0d2b2c' }}>
                   {step.title}
-                </h3>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1rem', color: 'var(--text-secondary)', maxWidth: '28rem', lineHeight: '1.75' }}>
+                </div>
+                <div className="text-xs leading-relaxed max-w-[180px] mx-auto" style={{ color: '#7aa8a9' }}>
                   {step.desc}
-                </p>
-              </div>
-              <div className="flex-1 flex justify-center">
-                {step.visual}
-              </div>
-            </motion.div>
-          ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="py-32 px-8" style={{ backgroundColor: 'var(--bg-dark)' }}>
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-center mb-12" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'var(--bg-primary)' }}>
-            A network built for{' '}
-            <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>pharmaceutical precision.</span>
-          </h2>
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: '-60px' }}
+            className="text-center mb-10"
+          >
+            <h2 className="font-bold mb-2" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#0d2b2c' }}>
+              Global logistics network
+            </h2>
+            <p className="text-sm" style={{ color: '#3d6b6c' }}>
+              Live cold-chain routes across 14 countries
+            </p>
+          </motion.div>
 
-          <div className="border" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true, margin: '-60px' }}
+            className="border rounded-2xl overflow-hidden"
+            style={{ borderColor: '#cceced', backgroundColor: '#f4fefe' }}
+          >
             <div className="relative h-[500px] overflow-hidden" style={{ cursor: isDragging ? 'grabbing' : 'grab' }}>
               <ComposableMap projection="geoMercator" projectionConfig={{ scale: 140 }}>
                 <ZoomableGroup
@@ -458,8 +446,8 @@ export default function LandingPage() {
                         <Geography
                           key={geo.rsmKey}
                           geography={geo}
-                          fill="rgba(255, 255, 255, 0.04)"
-                          stroke="rgba(255, 255, 255, 0.1)"
+                          fill="#eaf9f9"
+                          stroke="#cceced"
                           strokeWidth={0.5}
                         />
                       ))
@@ -481,17 +469,17 @@ export default function LandingPage() {
                       <Line
                         from={route.from}
                         to={route.to}
-                        stroke="var(--accent)"
+                        stroke="#16b6bb"
                         strokeWidth={2}
                         strokeLinecap="round"
                         strokeDasharray="5,5"
                         opacity={0.8}
                       />
                       <Marker coordinates={route.from}>
-                        <circle r={4} fill="var(--accent)" />
+                        <circle r={4} fill="#16b6bb" />
                       </Marker>
                       <Marker coordinates={route.to}>
-                        <circle r={4} fill="var(--accent)" opacity={0.6} />
+                        <circle r={4} fill="#16b6bb" opacity={0.6} />
                       </Marker>
                     </motion.g>
                   ))}
@@ -500,28 +488,28 @@ export default function LandingPage() {
               <div className="absolute bottom-3 right-3 flex flex-col gap-1">
                 <button
                   onClick={() => setPosition(pos => ({ ...pos, zoom: Math.min(pos.zoom * 1.5, 8) }))}
-                  className="w-8 h-8 border flex items-center justify-center text-lg font-bold transition-colors"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.6)' }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)'}
+                  className="w-8 h-8 bg-white border rounded-lg flex items-center justify-center text-lg font-bold transition-colors"
+                  style={{ borderColor: '#cceced', color: '#3d6b6c' }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#eaf9f9'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                 >
                   +
                 </button>
                 <button
                   onClick={() => setPosition(pos => ({ ...pos, zoom: Math.max(pos.zoom / 1.5, 1) }))}
-                  className="w-8 h-8 border flex items-center justify-center text-lg font-bold transition-colors"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.6)' }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)'}
+                  className="w-8 h-8 bg-white border rounded-lg flex items-center justify-center text-lg font-bold transition-colors"
+                  style={{ borderColor: '#cceced', color: '#3d6b6c' }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#eaf9f9'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                 >
                   −
                 </button>
                 <button
                   onClick={() => setPosition({ coordinates: [0, 20], zoom: 1 })}
-                  className="w-8 h-8 border flex items-center justify-center transition-colors"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.6)' }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)'}
+                  className="w-8 h-8 bg-white border rounded-lg flex items-center justify-center transition-colors"
+                  style={{ borderColor: '#cceced', color: '#3d6b6c' }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#eaf9f9'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                   title="Reset view"
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -531,43 +519,79 @@ export default function LandingPage() {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-32 px-8" style={{ backgroundColor: 'var(--bg-primary)' }}>
-        <div className="max-w-6xl mx-auto">
-          <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', letterSpacing: '0.3em', color: 'var(--accent)', marginBottom: '1rem' }}>
-            TEMPERATURE CLASSES
-          </div>
-          <h2 className="mb-16" style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.25rem', color: 'var(--text-primary)' }}>
-            Precision for every molecule.
-          </h2>
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: '-60px' }}
+            className="text-center mb-14"
+          >
+            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#008086' }}>
+              Built for pharma
+            </div>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#0d2b2c' }}>
+              Everything your team needs.
+            </h2>
+          </motion.div>
 
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
-              { range: '2-8°C', use: 'Vaccines · Biologics · Proteins', color: 'var(--accent)', barColor: 'var(--accent)' },
-              { range: '-20°C', use: 'Plasma · Enzymes · Reagents', color: 'var(--text-primary)', barColor: 'var(--text-secondary)' },
-              { range: '-70°C', use: 'mRNA · Gene Therapy · CAR-T', color: 'var(--text-primary)', barColor: 'var(--bg-dark)' }
-            ].map((tc, i) => (
+              {
+                icon: Shield,
+                title: 'Multitenant Security',
+                desc: 'Enterprise data isolation with role-based access control per organization'
+              },
+              {
+                icon: Zap,
+                title: 'AI Route Intelligence',
+                desc: 'Route optimization across cost, risk, transit time, and carbon'
+              },
+              {
+                icon: Thermometer,
+                title: 'Real-Time Telemetry',
+                desc: '24/7 temperature monitoring with instant excursion alerts'
+              },
+              {
+                icon: CheckCircle,
+                title: 'Compliance-Ready',
+                desc: 'Automated audit trails and documentation for global regulators'
+              },
+              {
+                icon: Package,
+                title: 'Emergency Mode',
+                desc: 'Priority routing and carrier capacity reservation for critical shipments'
+              },
+              {
+                icon: Leaf,
+                title: 'Carbon Tracking',
+                desc: 'CO₂ monitoring and sustainability recommendations per route'
+              }
+            ].map((feature, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
-                viewport={{ once: true, margin: '-80px' }}
-                className="relative border p-10 flex flex-col justify-between transition-colors"
-                style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-secondary)', minHeight: '320px' }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#E8E2D6'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                viewport={{ once: true, margin: '-60px' }}
+                className="border rounded-xl p-6 hover:shadow-sm transition-all"
+                style={{ borderColor: '#cceced' }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'rgba(22, 182, 187, 0.5)'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = '#cceced'}
               >
-                <div className="absolute left-0 top-0 bottom-0" style={{ width: '2px', backgroundColor: tc.barColor }} />
-                <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '3rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
-                  {tc.range}
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: '#eaf9f9' }}>
+                  <feature.icon className="w-5 h-5" style={{ color: '#008086' }} />
                 </div>
-                <div className="border-t my-6" style={{ borderColor: 'var(--border)' }} />
-                <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'var(--text-muted)', letterSpacing: '0.05em', lineHeight: '2' }}>
-                  {tc.use}
+                <div className="font-semibold text-sm mb-2" style={{ color: '#0d2b2c' }}>
+                  {feature.title}
+                </div>
+                <div className="text-xs leading-relaxed" style={{ color: '#7aa8a9' }}>
+                  {feature.desc}
                 </div>
               </motion.div>
             ))}
@@ -575,33 +599,106 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-32 px-8" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-center mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 3rem)', fontStyle: 'italic', color: 'var(--text-primary)' }}>
-            Simple, transparent pricing.
-          </h2>
-          <p className="text-center mb-16" style={{ fontFamily: 'Inter, sans-serif', color: 'var(--text-secondary)' }}>
-            Choose the plan that fits your scale
-          </p>
+      <section className="py-20 px-6" style={{ backgroundColor: '#f4fefe' }}>
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: '-60px' }}
+            className="text-center mb-10"
+          >
+            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#008086' }}>
+              Temperature classes
+            </div>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#0d2b2c' }}>
+              Certified for every cold chain requirement.
+            </h2>
+          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-10">
             {[
               {
-                name: 'Starter',
+                range: '2-8°C',
+                color: '#16b6bb',
+                use: 'Standard Cold',
+                examples: 'Vaccines, Biologics, Proteins'
+              },
+              {
+                range: '-20°C',
+                color: '#008086',
+                use: 'Frozen',
+                examples: 'Plasma, Enzymes, Reagents'
+              },
+              {
+                range: '-70°C',
+                color: '#891f00',
+                use: 'Ultra-Cold',
+                examples: 'mRNA, Gene Therapy, CAR-T'
+              }
+            ].map((tc, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                viewport={{ once: true, margin: '-60px' }}
+                className="bg-white border rounded-xl p-8 hover:shadow-sm transition-all"
+                style={{ borderColor: '#cceced' }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'rgba(22, 182, 187, 0.5)'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = '#cceced'}
+              >
+                <div className="font-bold text-4xl mb-1" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>
+                  {tc.range}
+                </div>
+                <div className="w-10 h-0.5 rounded-full mt-2 mb-4" style={{ backgroundColor: tc.color }} />
+                <div className="text-sm font-medium mb-1" style={{ color: '#3d6b6c' }}>
+                  {tc.use}
+                </div>
+                <div className="text-xs" style={{ color: '#7aa8a9' }}>
+                  {tc.examples}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: '-60px' }}
+            className="text-center mb-12"
+          >
+            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#008086' }}>
+              Pricing
+            </div>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#0d2b2c' }}>
+              Simple plans, no surprises.
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-6 mt-12">
+            {[
+              {
+                name: 'STARTER',
                 price: '$2,499',
                 period: '/month',
                 features: ['Up to 50 shipments/month', '2-8°C temperature class', 'Basic analytics', 'Email support', 'Standard documentation'],
                 highlighted: false
               },
               {
-                name: 'Professional',
+                name: 'PROFESSIONAL',
                 price: '$7,999',
                 period: '/month',
                 features: ['Up to 200 shipments/month', 'All temperature classes', 'Advanced analytics', 'Priority support', 'Compliance dossiers', 'API access'],
                 highlighted: true
               },
               {
-                name: 'Enterprise',
+                name: 'ENTERPRISE',
                 price: 'Custom',
                 period: '',
                 features: ['Unlimited shipments', 'Dedicated infrastructure', 'White-glove support', 'Custom integrations', 'SLA guarantees', 'On-site training'],
@@ -610,87 +707,65 @@ export default function LandingPage() {
             ].map((plan, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
-                viewport={{ once: true, margin: '-80px' }}
-                className="p-10"
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                viewport={{ once: true, margin: '-60px' }}
+                className="border rounded-xl p-8"
                 style={{
-                  backgroundColor: plan.highlighted ? 'var(--bg-dark)' : 'transparent',
-                  border: plan.highlighted ? 'none' : '1px solid var(--border)'
+                  backgroundColor: plan.highlighted ? '#0d2b2c' : '#f4fefe',
+                  borderColor: plan.highlighted ? '#0d2b2c' : '#cceced'
                 }}
               >
-                <h3 style={{
-                  fontFamily: 'IBM Plex Mono, monospace',
-                  fontSize: '1.5rem',
-                  fontWeight: 'bold',
-                  marginBottom: '0.5rem',
-                  color: plan.highlighted ? 'var(--bg-primary)' : 'var(--text-primary)'
-                }}>
+                {plan.highlighted && (
+                  <div className="text-center -mt-4 mb-4">
+                    <span className="inline-block px-3 py-1 rounded-full text-xs text-white" style={{ backgroundColor: '#16b6bb' }}>
+                      Most Popular
+                    </span>
+                  </div>
+                )}
+                <div className="font-semibold text-sm uppercase tracking-wide mb-2" style={{ color: plan.highlighted ? '#befcfe' : '#3d6b6c' }}>
                   {plan.name}
-                </h3>
-                <div className="mb-6">
-                  <span style={{
-                    fontFamily: 'IBM Plex Mono, monospace',
-                    fontSize: '3rem',
-                    fontWeight: 'bold',
-                    color: plan.highlighted ? 'var(--bg-primary)' : 'var(--text-primary)'
-                  }}>
-                    {plan.price}
-                  </span>
-                  <span style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '0.875rem',
-                    color: plan.highlighted ? 'rgba(255,255,255,0.4)' : 'var(--text-muted)'
-                  }}>
-                    {plan.period}
-                  </span>
                 </div>
-                <ul className="space-y-3 mb-8">
+                <div className="font-bold text-4xl mb-1" style={{ fontFamily: 'JetBrains Mono, monospace', color: plan.highlighted ? 'white' : '#0d2b2c' }}>
+                  {plan.price}
+                </div>
+                <div className="text-sm mb-6" style={{ color: '#7aa8a9' }}>
+                  {plan.period}
+                </div>
+                <div className="border-t mb-6" style={{ borderColor: plan.highlighted ? 'rgba(255,255,255,0.1)' : '#cceced' }} />
+                <div className="space-y-2.5 mb-6">
                   {plan.features.map((feature, fi) => (
-                    <li key={fi} className="flex items-start gap-2">
-                      <span style={{
-                        fontFamily: 'IBM Plex Mono, monospace',
-                        color: 'var(--accent)',
-                        fontSize: '0.875rem'
-                      }}>
-                        —
-                      </span>
-                      <span style={{
-                        fontFamily: 'Inter, sans-serif',
-                        fontSize: '0.875rem',
-                        color: plan.highlighted ? 'rgba(255,255,255,0.6)' : 'var(--text-secondary)'
-                      }}>
+                    <div key={fi} className="flex items-start gap-2 text-sm">
+                      <span className="text-xs" style={{ color: plan.highlighted ? '#befcfe' : '#16b6bb' }}>✓</span>
+                      <span style={{ color: plan.highlighted ? 'rgba(255,255,255,0.6)' : '#3d6b6c' }}>
                         {feature}
                       </span>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
                 <button
                   onClick={() => navigate('/login')}
-                  className="w-full px-6 py-3 transition-all"
+                  className="w-full py-3 rounded-lg text-sm font-medium transition-all mt-6"
                   style={{
-                    fontFamily: 'IBM Plex Mono, monospace',
-                    fontSize: '0.875rem',
-                    fontWeight: plan.highlighted ? 600 : 400,
-                    backgroundColor: plan.highlighted ? 'var(--accent)' : 'transparent',
-                    color: plan.highlighted ? 'var(--bg-dark)' : 'var(--text-primary)',
-                    border: plan.highlighted ? 'none' : '1px solid var(--bg-dark)'
+                    backgroundColor: plan.highlighted ? '#16b6bb' : 'transparent',
+                    color: plan.highlighted ? 'white' : '#16b6bb',
+                    border: plan.highlighted ? 'none' : '1px solid #16b6bb'
                   }}
                   onMouseEnter={(e) => {
                     if (plan.highlighted) {
-                      e.currentTarget.style.backgroundColor = 'var(--accent-dark)';
+                      e.currentTarget.style.backgroundColor = '#008086';
                     } else {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-dark)';
-                      e.currentTarget.style.color = 'var(--bg-primary)';
+                      e.currentTarget.style.backgroundColor = '#16b6bb';
+                      e.currentTarget.style.color = 'white';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (plan.highlighted) {
-                      e.currentTarget.style.backgroundColor = 'var(--accent)';
+                      e.currentTarget.style.backgroundColor = '#16b6bb';
                     } else {
                       e.currentTarget.style.backgroundColor = 'transparent';
-                      e.currentTarget.style.color = 'var(--text-primary)';
+                      e.currentTarget.style.color = '#16b6bb';
                     }
                   }}
                 >
@@ -702,49 +777,68 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-40 px-8 text-center" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: '#16b6bb' }}>
         <div className="max-w-4xl mx-auto">
-          <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(3rem, 6vw, 5rem)', lineHeight: '1.1' }}>
-            <span style={{ color: 'var(--text-primary)' }}>Ready to ship with </span>
-            <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>confidence?</span>
-          </h2>
-          <p className="mt-6 mb-12" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1.125rem', color: 'var(--text-secondary)' }}>
-            Join pharmaceutical companies worldwide who trust PolarAxis for their cold chain.
-          </p>
-
-          <div className="flex gap-4 justify-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: '-60px' }}
+            className="font-bold text-white mb-4"
+            style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
+          >
+            Ready to take control of your cold chain?
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true, margin: '-60px' }}
+            className="text-base mb-10 max-w-xl mx-auto"
+            style={{ color: 'rgba(255,255,255,0.8)' }}
+          >
+            Join pharmaceutical companies worldwide who trust PolarAxis for their logistics.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true, margin: '-60px' }}
+            className="flex gap-3 justify-center"
+          >
             <button
               onClick={() => navigate('/login')}
-              className="px-8 py-4 transition-all duration-300"
-              style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.875rem', letterSpacing: '0.05em', backgroundColor: 'var(--bg-dark)', color: 'var(--bg-primary)' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--accent)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-dark)'}
+              className="px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors"
+              style={{ backgroundColor: 'white', color: '#008086' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#befcfe'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
             >
-              Enter Platform
+              Get Started
             </button>
             <button
               onClick={() => navigate('/login')}
-              className="px-8 py-4 border bg-transparent transition-all duration-300"
-              style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.875rem', letterSpacing: '0.05em', borderColor: 'var(--border)', color: 'var(--text-secondary)' }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--text-primary)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
+              className="px-7 py-3.5 rounded-lg font-medium text-sm border text-white transition-colors"
+              style={{ borderColor: 'rgba(255,255,255,0.4)' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
             >
-              Request Demo
+              Talk to Sales
             </button>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <footer className="py-12 px-8" style={{ backgroundColor: 'var(--bg-dark)' }}>
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', letterSpacing: '0.3em', color: 'rgba(245,240,232,0.3)' }}>
-            POLARAXIS
+      <footer className="py-10 px-6" style={{ backgroundColor: '#0d2b2c' }}>
+        <div className="max-w-5xl mx-auto flex justify-between items-center">
+          <div className="flex items-center">
+            <div className="w-6 h-6 rounded-sm" style={{ backgroundColor: '#16b6bb' }} />
+            <span className="ml-2 font-semibold text-white">PolarAxis</span>
           </div>
-          <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'rgba(245,240,232,0.2)' }}>
+          <div className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
             Cold chain control. Zero compromise.
           </div>
-          <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', color: 'rgba(245,240,232,0.2)' }}>
-            © 2026
+          <div className="text-xs" style={{ fontFamily: 'JetBrains Mono, monospace', color: 'rgba(255,255,255,0.3)' }}>
+            © 2026 PolarAxis
           </div>
         </div>
       </footer>
