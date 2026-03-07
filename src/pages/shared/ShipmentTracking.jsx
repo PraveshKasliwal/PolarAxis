@@ -24,7 +24,23 @@ export default function ShipmentTracking() {
   setTimeout(() => setLoading(false), 400);
 
   const shipment = allShipments.find(s => s.id === id);
-  const tempData = temperatureLogs[id] || [];
+  const tempData = temperatureLogs[id] || (() => {
+    if (!shipment) return [];
+    const base = (shipment.tempRange.min + shipment.tempRange.max) / 2;
+    const variance = (shipment.tempRange.max - shipment.tempRange.min) * 0.12;
+    const start = new Date(shipment.departureDate || '2026-03-07T00:00:00Z');
+    return Array.from({ length: 48 }, (_, i) => ({
+      shipmentId: id,
+      timestamp: new Date(start.getTime() + i * 3600000).toISOString(),
+      temperature: parseFloat(
+        (base + Math.sin(i * 0.4) * variance + (Math.random() - 0.5) * 0.3)
+        .toFixed(2)
+      ),
+      humidity: parseFloat((45 + Math.random() * 10).toFixed(1)),
+      battery: parseFloat((100 - (i / 48) * 20).toFixed(1)),
+      location: i % 6 === 0 ? 'Hub Transfer' : 'In Transit'
+    }));
+  })();
 
   const [position, setPosition] = useState({
     coordinates: shipment ? [
