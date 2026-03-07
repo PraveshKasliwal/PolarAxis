@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, MapPin, Truck, Thermometer, Package, Shield, FileText, AlertCircle } from 'lucide-react';
+import { ArrowLeft, MapPin, Truck, Thermometer, Package, Shield, FileText, AlertCircle, Play } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useShipments } from '../../hooks/useShipments';
 import { temperatureLogs } from '../../data/temperatureLogs';
@@ -75,13 +75,22 @@ export default function ShipmentTracking() {
 
   return (
     <div className="space-y-6">
-      <button
-        onClick={() => navigate(-1)}
-        className="flex items-center gap-2 text-secondary hover:text-primary transition-colors"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Back
-      </button>
+      <div className="flex items-center justify-between">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-secondary hover:text-primary transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
+        </button>
+        <button
+          onClick={() => navigate('/replay/' + shipment.id)}
+          className="flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 text-accent rounded-lg hover:bg-accent/20 transition-colors text-sm font-medium"
+        >
+          <Play className="w-4 h-4" />
+          Replay Journey
+        </button>
+      </div>
 
       <div className="bg-surface border border-border rounded-xl p-6">
         <div className="flex items-start justify-between mb-6">

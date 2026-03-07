@@ -21,6 +21,7 @@ import InventoryDashboard from './pages/ops/InventoryDashboard';
 import TenantManagement from './pages/ops/TenantManagement';
 import AnalyticsDashboard from './pages/ops/AnalyticsDashboard';
 import SustainabilityDashboard from './pages/ops/SustainabilityDashboard';
+import ShipmentReplay from './pages/shared/ShipmentReplay';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -118,6 +119,17 @@ function AppRoutes() {
           <PrivateRoute>
             <AppShell>
               <ShipmentTracking />
+            </AppShell>
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/replay/:id"
+        element={
+          <PrivateRoute>
+            <AppShell>
+              <ShipmentReplay />
             </AppShell>
           </PrivateRoute>
         }
