@@ -12,6 +12,7 @@ export default function LandingPage() {
   const [stats, setStats] = useState({ shipments: 0, compliance: 0, countries: 0, tempClasses: 0 });
   const [position, setPosition] = useState({ coordinates: [0, 20], zoom: 1 });
   const [isDragging, setIsDragging] = useState(false);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   function handleMoveEnd(position) {
     setPosition(position);
@@ -41,6 +42,56 @@ export default function LandingPage() {
 
     return () => clearInterval(timer);
   }, []);
+
+  const testimonials = [
+    {
+      name: 'Dr. Sarah Chen',
+      title: 'VP Supply Chain',
+      company: 'NovaBio Pharma',
+      initials: 'SC',
+      stars: 5,
+      text: 'PolarAxis transformed how we manage our mRNA shipments. The real-time telemetry caught a temperature excursion during a Frankfurt transit that would have cost us $2.1M in product loss. The platform paid for itself in one incident.'
+    },
+    {
+      name: 'Marcus Reinholt',
+      title: 'Head of Logistics',
+      company: 'CryoMed Solutions',
+      initials: 'MR',
+      stars: 5,
+      text: 'We evaluated six platforms before choosing PolarAxis. The compliance dossier automation alone saves our team 40 hours per month. Regulators in three countries have accepted our documentation without a single query.'
+    },
+    {
+      name: 'Priya Anand',
+      title: 'Chief Operations Officer',
+      company: 'PharmaCold International',
+      initials: 'PA',
+      stars: 5,
+      text: 'The AI route optimizer found a sea+rail combination for our Singapore corridor that cut our carbon footprint by 34% and reduced cost by 18%. Our sustainability team was shocked. Our CFO was delighted.'
+    },
+    {
+      name: 'James Whitfield',
+      title: 'Global Compliance Director',
+      company: 'MedVault Therapeutics',
+      initials: 'JW',
+      stars: 5,
+      text: "Before PolarAxis, audit prep took two weeks of manual work. Now I generate a complete GDP-compliant dossier in four clicks. We passed our EU audit last quarter with zero findings for the first time in the company's history."
+    },
+    {
+      name: 'Elena Vasquez',
+      title: 'Director of Cold Chain',
+      company: 'BioFreeze Labs',
+      initials: 'EV',
+      stars: 5,
+      text: 'Managing -70°C shipments across 12 countries used to feel impossible. PolarAxis gives me visibility I never had before — I can see every shipment, every sensor reading, every alert from one screen. It is the control tower we always needed.'
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTestimonial(prev => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
 
   return (
     <div className="min-h-screen bg-white" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
@@ -777,6 +828,134 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* TESTIMONIALS */}
+      <section className="py-24 px-6 overflow-hidden" style={{ backgroundColor: '#0d2b2c' }}>
+        <div className="max-w-6xl mx-auto">
+
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-block text-xs font-medium px-3 py-1 rounded-full mb-4"
+              style={{ backgroundColor: 'rgba(22,182,187,0.15)', color: '#16b6bb' }}>
+              Customer Stories
+            </div>
+            <h2 className="text-3xl font-bold text-white mb-3">
+              Trusted by pharma teams worldwide
+            </h2>
+            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.4)' }}>
+              From biotech startups to global pharmaceutical manufacturers
+            </p>
+          </motion.div>
+
+          {/* Cards — show 3 at a time, center card is active */}
+          <div className="relative">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                (activeTestimonial - 1 + testimonials.length) % testimonials.length,
+                activeTestimonial,
+                (activeTestimonial + 1) % testimonials.length
+              ].map((idx, position) => {
+                const t = testimonials[idx];
+                const isCenter = position === 1;
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: position * 0.05 }}
+                    className="rounded-2xl p-6 flex flex-col cursor-pointer transition-all duration-300"
+                    style={{
+                      backgroundColor: isCenter ? '#ffffff' : 'rgba(255,255,255,0.06)',
+                      border: isCenter ? 'none' : '1px solid rgba(255,255,255,0.08)',
+                      transform: isCenter ? 'scale(1.04)' : 'scale(0.97)',
+                      opacity: isCenter ? 1 : 0.6
+                    }}
+                    onClick={() => setActiveTestimonial(idx)}
+                  >
+                    {/* Stars */}
+                    <div className="flex gap-0.5 mb-4">
+                      {Array.from({ length: t.stars }).map((_, i) => (
+                        <span key={i} className="text-base" style={{ color: '#f59e0b' }}>★</span>
+                      ))}
+                    </div>
+
+                    {/* Quote */}
+                    <p className="text-sm leading-relaxed flex-1 mb-6"
+                      style={{ color: isCenter ? '#3d6b6c' : 'rgba(255,255,255,0.55)' }}>
+                      "{t.text}"
+                    </p>
+
+                    {/* Author */}
+                    <div className="flex items-center gap-3">
+                      {/* Avatar circle with initials */}
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold"
+                        style={{
+                          backgroundColor: isCenter ? '#eaf9f9' : 'rgba(22,182,187,0.2)',
+                          color: isCenter ? '#008086' : '#16b6bb'
+                        }}>
+                        {t.initials}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-sm"
+                          style={{ color: isCenter ? '#0d2b2c' : 'rgba(255,255,255,0.85)' }}>
+                          {t.name}
+                        </div>
+                        <div className="text-xs mt-0.5"
+                          style={{ color: isCenter ? '#7aa8a9' : 'rgba(255,255,255,0.35)' }}>
+                          {t.title} · {t.company}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Left / Right arrows */}
+            <button
+              onClick={() => setActiveTestimonial(prev => (prev - 1 + testimonials.length) % testimonials.length)}
+              className="absolute -left-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-all"
+              style={{ backgroundColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)' }}
+              onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(22,182,187,0.25)'}
+              onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.08)'}
+            >
+              ‹
+            </button>
+            <button
+              onClick={() => setActiveTestimonial(prev => (prev + 1) % testimonials.length)}
+              className="absolute -right-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-all"
+              style={{ backgroundColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)' }}
+              onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(22,182,187,0.25)'}
+              onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.08)'}
+            >
+              ›
+            </button>
+          </div>
+
+          {/* Dot indicators */}
+          <div className="flex justify-center gap-2 mt-10">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveTestimonial(i)}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: i === activeTestimonial ? '24px' : '8px',
+                  height: '8px',
+                  backgroundColor: i === activeTestimonial ? '#16b6bb' : 'rgba(255,255,255,0.2)'
+                }}
+              />
+            ))}
+          </div>
+
+        </div>
+      </section>
+
       <section className="py-20 px-6 text-center" style={{ backgroundColor: '#16b6bb' }}>
         <div className="max-w-4xl mx-auto">
           <motion.h2
@@ -828,19 +1007,184 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer className="py-10 px-6" style={{ backgroundColor: '#0d2b2c' }}>
-        <div className="max-w-5xl mx-auto flex justify-between items-center">
-          <div className="flex items-center">
-            <div className="w-6 h-6 rounded-sm" style={{ backgroundColor: '#16b6bb' }} />
-            <span className="ml-2 font-semibold text-white">PolarAxis</span>
-          </div>
-          <div className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
-            Cold chain control. Zero compromise.
-          </div>
-          <div className="text-xs" style={{ fontFamily: 'JetBrains Mono, monospace', color: 'rgba(255,255,255,0.3)' }}>
-            © 2026 PolarAxis
+      <footer style={{ backgroundColor: '#0a1f20' }}>
+
+        {/* Top footer — 4 column grid */}
+        <div className="max-w-6xl mx-auto px-6 pt-16 pb-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+            {/* Col 1 — Brand */}
+            <div className="md:col-span-1">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-7 h-7 rounded-md flex items-center justify-center"
+                  style={{ backgroundColor: '#16b6bb' }}>
+                  <span className="text-white font-bold text-xs">P</span>
+                </div>
+                <span className="font-bold text-white text-lg">PolarAxis</span>
+              </div>
+              <p className="text-sm leading-relaxed mb-6"
+                style={{ color: 'rgba(255,255,255,0.35)' }}>
+                The pharmaceutical cold chain control tower.
+                Real-time telemetry, AI routing, and
+                compliance automation — worldwide.
+              </p>
+              {/* Social links */}
+              <div className="flex gap-3">
+                {['Li', 'Tw', 'Yt'].map((s) => (
+                  <div key={s}
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-semibold cursor-pointer transition-all"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.4)' }}
+                    onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'rgba(22,182,187,0.2)'; e.currentTarget.style.color = '#16b6bb'; }}
+                    onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; }}
+                  >
+                    {s}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Col 2 — Platform */}
+            <div>
+              <h4 className="text-xs font-semibold uppercase tracking-widest mb-5"
+                style={{ color: '#16b6bb' }}>Platform</h4>
+              <ul className="space-y-3">
+                {['Control Tower', 'Shipment Tracking', 'Temperature Monitoring', 'Route Optimizer', 'Compliance Docs', 'Analytics'].map(item => (
+                  <li key={item}>
+                    <span className="text-sm cursor-pointer transition-colors"
+                      style={{ color: 'rgba(255,255,255,0.4)' }}
+                      onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.85)'}
+                      onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+                    >{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Col 3 — Company */}
+            <div>
+              <h4 className="text-xs font-semibold uppercase tracking-widest mb-5"
+                style={{ color: '#16b6bb' }}>Company</h4>
+              <ul className="space-y-3">
+                {['About Us', 'Careers', 'Press', 'Partners', 'Security', 'Privacy Policy'].map(item => (
+                  <li key={item}>
+                    <span className="text-sm cursor-pointer transition-colors"
+                      style={{ color: 'rgba(255,255,255,0.4)' }}
+                      onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.85)'}
+                      onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+                    >{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Col 4 — Contact Us */}
+            <div>
+              <h4 className="text-xs font-semibold uppercase tracking-widest mb-5"
+                style={{ color: '#16b6bb' }}>Contact Us</h4>
+
+              <div className="space-y-4 mb-6">
+                <div>
+                  <div className="text-xs mb-1" style={{ color: 'rgba(255,255,255,0.3)' }}>
+                    General Inquiries
+                  </div>
+                  <div className="text-sm" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                    hello@polaraxis.io
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs mb-1" style={{ color: 'rgba(255,255,255,0.3)' }}>
+                    Enterprise Sales
+                  </div>
+                  <div className="text-sm" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                    sales@polaraxis.io
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs mb-1" style={{ color: 'rgba(255,255,255,0.3)' }}>
+                    24/7 Support Hotline
+                  </div>
+                  <div className="text-sm font-mono" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                    +1 (800) 765-4321
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs mb-1" style={{ color: 'rgba(255,255,255,0.3)' }}>
+                    Headquarters
+                  </div>
+                  <div className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                    142 Cold Chain Plaza, Suite 800<br />
+                    Amsterdam, Netherlands 1012 AB
+                  </div>
+                </div>
+              </div>
+
+              {/* Mini contact form */}
+              <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <div className="text-xs font-medium text-white mb-3">Send us a message</div>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  className="w-full text-xs rounded-lg px-3 py-2 mb-2 outline-none"
+                  style={{
+                    backgroundColor: 'rgba(255,255,255,0.07)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    color: 'rgba(255,255,255,0.8)',
+                  }}
+                />
+                <textarea
+                  placeholder="How can we help?"
+                  rows={2}
+                  className="w-full text-xs rounded-lg px-3 py-2 mb-2 outline-none resize-none"
+                  style={{
+                    backgroundColor: 'rgba(255,255,255,0.07)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    color: 'rgba(255,255,255,0.8)',
+                  }}
+                />
+                <button
+                  className="w-full py-2 rounded-lg text-xs font-semibold transition-all"
+                  style={{ backgroundColor: '#16b6bb', color: 'white' }}
+                  onMouseEnter={e => e.currentTarget.style.backgroundColor = '#008086'}
+                  onMouseLeave={e => e.currentTarget.style.backgroundColor = '#16b6bb'}
+                >
+                  Send Message
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
+
+        {/* Divider */}
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+
+            <div className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
+              © 2026 PolarAxis Technologies B.V. All rights reserved.
+            </div>
+
+            {/* Certifications / trust badges */}
+            <div className="flex items-center gap-4">
+              {['GDP Compliant', 'ISO 9001', 'SOC 2 Type II', 'GDPR Ready'].map(badge => (
+                <div key={badge}
+                  className="text-xs px-2.5 py-1 rounded-full"
+                  style={{
+                    backgroundColor: 'rgba(22,182,187,0.1)',
+                    color: '#16b6bb',
+                    border: '1px solid rgba(22,182,187,0.2)'
+                  }}>
+                  {badge}
+                </div>
+              ))}
+            </div>
+
+            <div className="text-xs" style={{ fontFamily: 'JetBrains Mono, monospace', color: 'rgba(255,255,255,0.2)' }}>
+              v2.4.1 · All systems operational
+            </div>
+
+          </div>
+        </div>
+
       </footer>
     </div>
   );
