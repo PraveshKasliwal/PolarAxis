@@ -60,9 +60,9 @@ export default function TopBar() {
       </div>
 
       <div className="flex items-center gap-2">
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg" style={{ backgroundColor: 'rgba(255,236,64,0.1)', border: '1px solid rgba(255,236,64,0.25)' }}>
-          <Shield className="w-4 h-4" style={{ color: '#ffec40' }} />
-          <span className="text-xs font-medium" style={{ color: '#ffec40' }}>
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 rounded-lg">
+          <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">
             Tenant Isolated Session
           </span>
         </div>
@@ -92,7 +92,7 @@ export default function TopBar() {
                     onClick={() => handleRoleSwitch(item.user)}
                     className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors ${
                       currentUser?.id === item.user?.id
-                        ? 'bg-accent text-[#121212]'
+                        ? 'bg-accent text-white'
                         : 'text-secondary hover:bg-border hover:text-primary'
                     }`}
                   >

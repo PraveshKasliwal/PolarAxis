@@ -92,8 +92,8 @@ export default function Sidebar() {
             animate={{ opacity: 1 }}
             className="flex items-center gap-2"
           >
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#ffec40' }}>
-              <Package className="w-5 h-5" style={{ color: '#121212' }} />
+            <div className="w-8 h-8 bg-[#16b6bb] rounded-lg flex items-center justify-center">
+              <Package className="w-5 h-5 text-white" />
             </div>
             <span className="font-bold text-lg text-primary">PolarAxis</span>
           </motion.div>
@@ -154,13 +154,13 @@ export default function Sidebar() {
                               className={({ isActive }) =>
                                 `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                                   isActive
-                                    ? 'bg-accent'
+                                    ? 'bg-accent text-white'
                                     : 'text-secondary hover:bg-border hover:text-primary'
                                 }`
                               }
                             >
-                              <subItem.icon className="w-4 h-4" style={{ color: '#121212' }} />
-                              <span style={{ color: '#121212' }}>{subItem.name}</span>
+                              <subItem.icon className="w-4 h-4" />
+                              <span>{subItem.name}</span>
                             </NavLink>
                           ))}
                         </motion.div>
@@ -172,18 +172,14 @@ export default function Sidebar() {
                       className={({ isActive }) =>
                         `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                           isActive
-                            ? 'bg-accent'
+                            ? 'bg-accent text-white'
                             : 'text-secondary hover:bg-border hover:text-primary'
                         }`
                       }
                     >
-                      {({ isActive }) => (
-                        <>
-                          <item.icon className="w-5 h-5 flex-shrink-0" style={isActive ? { color: '#121212' } : {}} />
-                          {!isCollapsed && (
-                            <span className="text-sm font-medium" style={isActive ? { color: '#121212' } : {}}>{item.name}</span>
-                          )}
-                        </>
+                      <item.icon className="w-5 h-5 flex-shrink-0" />
+                      {!isCollapsed && (
+                        <span className="text-sm font-medium">{item.name}</span>
                       )}
                     </NavLink>
                   )}
@@ -197,7 +193,7 @@ export default function Sidebar() {
       {!isCollapsed && currentUser && (
         <div className="p-4 border-t border-border">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center font-semibold" style={{ color: '#121212' }}>
+            <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-semibold">
               {currentUser.avatar}
             </div>
             <div className="flex-1 min-w-0">

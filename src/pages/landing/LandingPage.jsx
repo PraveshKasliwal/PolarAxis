@@ -96,39 +96,39 @@ export default function LandingPage() {
   }, [testimonials.length]);
 
   return (
-    <div className="min-h-screen" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif', backgroundColor: '#121212' }}>
+    <div className="min-h-screen bg-white" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
       <style>
         {`
           :root {
-            --teal-primary: #ffec40;
-            --teal-dark: #d4c200;
-            --teal-light: #fffbe0;
+            --teal-primary: #16b6bb;
+            --teal-dark: #008086;
+            --teal-light: #befcfe;
             --red-accent: #891f00;
-            --bg: #121212;
-            --bg-soft: #161616;
-            --bg-muted: #1e1e1e;
-            --text-primary: #fafafa;
-            --text-secondary: #a3a3a3;
-            --text-muted: #737373;
-            --border: #2c2c2c;
+            --bg: #ffffff;
+            --bg-soft: #f4fefe;
+            --bg-muted: #eaf9f9;
+            --text-primary: #0d2b2c;
+            --text-secondary: #3d6b6c;
+            --text-muted: #7aa8a9;
+            --border: #cceced;
           }
         `}
       </style>
 
-      <nav className="sticky top-0 border-b z-50" style={{ backgroundColor: '#121212', borderColor: '#2c2c2c' }}>
+      <nav className="sticky top-0 bg-white border-b z-50" style={{ borderColor: '#cceced' }}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center">
-            <div className="w-7 h-7 rounded-sm" style={{ backgroundColor: '#ffec40' }} />
-            <span className="ml-2 font-semibold text-lg" style={{ color: '#fafafa' }}>PolarAxis</span>
+            <div className="w-7 h-7 rounded-sm" style={{ backgroundColor: '#16b6bb' }} />
+            <span className="ml-2 font-semibold text-lg" style={{ color: '#0d2b2c' }}>PolarAxis</span>
           </div>
           <div className="flex items-center gap-3">
             <ThemeToggle />
             <button
               onClick={() => navigate('/login')}
               className="px-5 py-2 rounded-lg text-sm font-medium transition-colors"
-              style={{ backgroundColor: '#ffec40', color: '#121212' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#d4c200'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#ffec40'}
+              style={{ backgroundColor: '#16b6bb', color: 'white' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#008086'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#16b6bb'}
             >
               Sign In
             </button>
@@ -136,14 +136,14 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <section className="pt-20 pb-24 px-6" style={{ backgroundColor: '#121212' }}>
+      <section className="bg-white pt-20 pb-24 px-6">
         <div className="max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             className="inline-block mb-6 px-4 py-1.5 rounded-full text-xs font-medium border"
-            style={{ backgroundColor: '#1e1e1e', color: '#d4c200', borderColor: '#2c2c2c' }}
+            style={{ backgroundColor: '#eaf9f9', color: '#008086', borderColor: '#cceced' }}
           >
             Pharmaceutical Cold Chain Platform
           </motion.div>
@@ -153,10 +153,10 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
             className="font-bold leading-tight mb-6"
-            style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: '#fafafa' }}
+            style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: '#0d2b2c' }}
           >
             Ship pharmaceuticals with{' '}
-            <span style={{ color: '#ffec40' }}>temperature certainty.</span>
+            <span style={{ color: '#16b6bb' }}>temperature certainty.</span>
           </motion.h1>
 
           <motion.p
@@ -164,7 +164,7 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
             className="font-normal text-lg leading-relaxed mb-10 max-w-2xl mx-auto"
-            style={{ color: '#a3a3a3' }}
+            style={{ color: '#3d6b6c' }}
           >
             Real-time cold chain monitoring, AI-powered routing, and automated compliance for global pharmaceutical logistics.
           </motion.p>
@@ -178,23 +178,23 @@ export default function LandingPage() {
             <button
               onClick={() => navigate('/login')}
               className="px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors shadow-sm"
-              style={{ backgroundColor: '#ffec40', color: '#121212' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#d4c200'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#ffec40'}
+              style={{ backgroundColor: '#16b6bb', color: 'white' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#008086'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#16b6bb'}
             >
               Get Started
             </button>
             <button
               onClick={() => navigate('/login')}
-              className="px-7 py-3.5 rounded-lg font-medium text-sm border transition-colors"
-              style={{ borderColor: '#2c2c2c', color: '#a3a3a3', backgroundColor: 'transparent' }}
+              className="px-7 py-3.5 rounded-lg font-medium text-sm bg-white border transition-colors"
+              style={{ borderColor: '#cceced', color: '#3d6b6c' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#ffec40';
-                e.currentTarget.style.color = '#fafafa';
+                e.currentTarget.style.borderColor = '#16b6bb';
+                e.currentTarget.style.color = '#0d2b2c';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#2c2c2c';
-                e.currentTarget.style.color = '#a3a3a3';
+                e.currentTarget.style.borderColor = '#cceced';
+                e.currentTarget.style.color = '#3d6b6c';
               }}
             >
               Request a Demo
@@ -206,7 +206,7 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mt-16 border rounded-2xl overflow-hidden shadow-xl max-w-4xl mx-auto"
-            style={{ borderColor: '#2c2c2c', boxShadow: '0 20px 60px rgba(255, 236, 64, 0.1)' }}
+            style={{ borderColor: '#cceced', boxShadow: '0 20px 60px rgba(22, 182, 187, 0.1)' }}
           >
             <div className="px-4 py-3 border-b flex items-center gap-2" style={{ backgroundColor: '#eaf9f9', borderColor: '#cceced' }}>
               <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#891f00' }} />
@@ -286,7 +286,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-14" style={{ backgroundColor: '#ffec40' }}>
+      <section className="py-14" style={{ backgroundColor: '#16b6bb' }}>
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4">
           {[
             { value: stats.shipments, label: 'ACTIVE SHIPMENTS' },
@@ -299,10 +299,10 @@ export default function LandingPage() {
               className="text-center px-8"
               style={{ borderRight: i < 3 ? '1px solid rgba(255,255,255,0.2)' : 'none' }}
             >
-              <div className="font-bold text-5xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#121212' }}>
+              <div className="font-bold text-5xl text-white" style={{ fontFamily: 'JetBrains Mono, monospace' }}>
                 {stat.value}
               </div>
-              <div className="text-xs mt-2 uppercase tracking-wide" style={{ color: 'rgba(18,18,18,0.6)' }}>
+              <div className="text-xs mt-2 uppercase tracking-wide" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 {stat.label}
               </div>
             </div>
@@ -310,7 +310,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6" style={{ backgroundColor: '#121212' }}>
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -319,10 +319,10 @@ export default function LandingPage() {
             viewport={{ once: true, margin: '-60px' }}
             className="text-center mb-14"
           >
-            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#d4c200' }}>
+            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#008086' }}>
               Why it matters
             </div>
-            <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#fafafa' }}>
+            <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#0d2b2c' }}>
               Cold chain failure is costly.
             </h2>
             <p className="text-base max-w-xl mx-auto" style={{ color: '#3d6b6c' }}>
@@ -394,7 +394,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6" style={{ backgroundColor: '#161616' }}>
+      <section className="py-20 px-6" style={{ backgroundColor: '#f4fefe' }}>
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -403,10 +403,10 @@ export default function LandingPage() {
             viewport={{ once: true, margin: '-60px' }}
             className="text-center mb-14"
           >
-            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#d4c200' }}>
+            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#008086' }}>
               How it works
             </div>
-            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#fafafa' }}>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#0d2b2c' }}>
               From order to delivery,{' '}
               <span style={{ color: '#16b6bb' }}>in four steps.</span>
             </h2>
@@ -458,7 +458,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6" style={{ backgroundColor: '#121212' }}>
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -576,7 +576,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6" style={{ backgroundColor: '#121212' }}>
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -585,10 +585,10 @@ export default function LandingPage() {
             viewport={{ once: true, margin: '-60px' }}
             className="text-center mb-14"
           >
-            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#d4c200' }}>
+            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#008086' }}>
               Built for pharma
             </div>
-            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#fafafa' }}>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#0d2b2c' }}>
               Everything your team needs.
             </h2>
           </motion.div>
@@ -652,7 +652,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6" style={{ backgroundColor: '#161616' }}>
+      <section className="py-20 px-6" style={{ backgroundColor: '#f4fefe' }}>
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -661,10 +661,10 @@ export default function LandingPage() {
             viewport={{ once: true, margin: '-60px' }}
             className="text-center mb-10"
           >
-            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#d4c200' }}>
+            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#008086' }}>
               Temperature classes
             </div>
-            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#fafafa' }}>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#0d2b2c' }}>
               Certified for every cold chain requirement.
             </h2>
           </motion.div>
@@ -717,7 +717,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6" style={{ backgroundColor: '#121212' }}>
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -726,10 +726,10 @@ export default function LandingPage() {
             viewport={{ once: true, margin: '-60px' }}
             className="text-center mb-12"
           >
-            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#d4c200' }}>
+            <div className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: '#008086' }}>
               Pricing
             </div>
-            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#fafafa' }}>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#0d2b2c' }}>
               Simple plans, no surprises.
             </h2>
           </motion.div>
@@ -1021,15 +1021,15 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: '#ffec40' }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: '#16b6bb' }}>
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true, margin: '-60px' }}
-            className="font-bold mb-4"
-            style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: '#121212' }}
+            className="font-bold text-white mb-4"
+            style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
           >
             Ready to take control of your cold chain?
           </motion.h2>
@@ -1039,7 +1039,7 @@ export default function LandingPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true, margin: '-60px' }}
             className="text-base mb-10 max-w-xl mx-auto"
-            style={{ color: 'rgba(18,18,18,0.6)' }}
+            style={{ color: 'rgba(255,255,255,0.8)' }}
           >
             Join pharmaceutical companies worldwide who trust PolarAxis for their logistics.
           </motion.p>
@@ -1053,17 +1053,17 @@ export default function LandingPage() {
             <button
               onClick={() => navigate('/login')}
               className="px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors"
-              style={{ backgroundColor: '#121212', color: '#ffec40' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#1e1e1e'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#121212'}
+              style={{ backgroundColor: 'white', color: '#008086' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#befcfe'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
             >
               Get Started
             </button>
             <button
               onClick={() => navigate('/login')}
-              className="px-7 py-3.5 rounded-lg font-medium text-sm border transition-colors"
-              style={{ borderColor: 'rgba(18,18,18,0.4)', color: '#121212' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(18,18,18,0.1)'}
+              className="px-7 py-3.5 rounded-lg font-medium text-sm border text-white transition-colors"
+              style={{ borderColor: 'rgba(255,255,255,0.4)' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
             >
               Talk to Sales
@@ -1072,7 +1072,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer style={{ backgroundColor: '#0d0d0d' }}>
+      <footer style={{ backgroundColor: '#0a1f20' }}>
 
         {/* Top footer — 4 column grid */}
         <div className="max-w-6xl mx-auto px-6 pt-16 pb-12">
@@ -1082,8 +1082,8 @@ export default function LandingPage() {
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-7 h-7 rounded-md flex items-center justify-center"
-                  style={{ backgroundColor: '#ffec40' }}>
-                  <span className="font-bold text-xs" style={{ color: '#121212' }}>P</span>
+                  style={{ backgroundColor: '#16b6bb' }}>
+                  <span className="text-white font-bold text-xs">P</span>
                 </div>
                 <span className="font-bold text-white text-lg">PolarAxis</span>
               </div>

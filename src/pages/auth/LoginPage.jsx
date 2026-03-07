@@ -110,8 +110,8 @@ export default function LoginPage() {
           className="w-full max-w-md"
         >
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#ffec40' }}>
-              <Package className="w-7 h-7" style={{ color: '#121212' }} />
+            <div className="w-12 h-12 bg-gradient-to-br from-[#16b6bb] to-[#008086] rounded-xl flex items-center justify-center">
+              <Package className="w-7 h-7 text-white" />
             </div>
             <span className="text-2xl font-bold text-primary">PolarAxis</span>
           </div>
@@ -169,13 +169,10 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => handleDemoLogin('operations')}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors group"
-                style={{ backgroundColor: 'rgba(255,236,64,0.1)', border: '1px solid rgba(255,236,64,0.3)' }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,236,64,0.2)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,236,64,0.1)'}
+                className="w-full flex items-center gap-3 px-4 py-3 bg-[#16b6bb]/10 hover:bg-[#16b6bb]/20 border border-sky-500/30 rounded-lg text-left transition-colors group"
               >
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#ffec40' }}>
-                  <Building className="w-5 h-5" style={{ color: '#121212' }} />
+                <div className="w-10 h-10 bg-[#16b6bb] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Building className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">
                   <div className="text-sm font-semibold text-primary">Login as Operations Admin</div>
@@ -212,8 +209,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full py-3 bg-accent hover:bg-accent-dark font-semibold rounded-lg transition-colors"
-              style={{ color: '#121212' }}
+              className="w-full py-3 bg-accent hover:bg-accent-dark text-white font-semibold rounded-lg transition-colors"
             >
               Sign In
             </button>
@@ -221,7 +217,7 @@ export default function LoginPage() {
         </motion.div>
       </div>
 
-      <div className="hidden lg:flex lg:w-1/2 items-center justify-center p-12 relative overflow-hidden" style={{ backgroundColor: '#121212' }}>
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#0d2b2c] via-[#0d3b3c] to-[#0d2b2c] dark:from-black dark:via-[#0d3b3c] dark:to-black items-center justify-center p-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-10" />
 
         <motion.div
@@ -236,7 +232,7 @@ export default function LoginPage() {
               <br />
               Zero compromise.
             </h2>
-            <p className="text-lg" style={{ color: '#fffbe0' }}>
+            <p className="text-[#befcfe] text-lg">
               Real-time monitoring and AI-powered logistics for pharmaceutical supply chains
             </p>
           </div>
@@ -248,9 +244,9 @@ export default function LoginPage() {
               transition={{ delay: 0.3 }}
               className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6"
             >
-              <Globe className="w-8 h-8 mb-3" style={{ color: '#fffbe0' }} />
+              <Globe className="w-8 h-8 text-[#befcfe] mb-3" />
               <div className="text-3xl font-bold mb-1 font-mono">{stats.shipments}</div>
-              <div className="text-sm" style={{ color: '#fffbe0' }}>Active Shipments</div>
+              <div className="text-sm text-[#befcfe]">Active Shipments</div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -260,7 +256,7 @@ export default function LoginPage() {
             >
               <TrendingUp className="w-8 h-8 text-emerald-400 mb-3" />
               <div className="text-3xl font-bold mb-1 font-mono">{stats.compliance}%</div>
-              <div className="text-sm" style={{ color: '#fffbe0' }}>Temp Compliance</div>
+              <div className="text-sm text-[#befcfe]">Temp Compliance</div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -268,38 +264,38 @@ export default function LoginPage() {
               transition={{ delay: 0.5 }}
               className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6"
             >
-              <Package className="w-8 h-8 mb-3" style={{ color: '#ffec40' }} />
+              <Package className="w-8 h-8 text-purple-400 mb-3" />
               <div className="text-3xl font-bold mb-1 font-mono">{stats.countries}</div>
-              <div className="text-sm" style={{ color: '#fffbe0' }}>Countries Covered</div>
+              <div className="text-sm text-[#befcfe]">Countries Covered</div>
             </motion.div>
           </div>
 
           <div className="space-y-4">
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: '#ffec40' }}>
-                <span className="text-xs font-bold" style={{ color: '#121212' }}>✓</span>
+              <div className="w-6 h-6 bg-[#16b6bb] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-xs font-bold">✓</span>
               </div>
               <div>
                 <div className="font-semibold mb-1">Multi-tenant isolation</div>
-                <div className="text-sm" style={{ color: '#fffbe0' }}>Enterprise-grade security and data separation</div>
+                <div className="text-sm text-[#befcfe]">Enterprise-grade security and data separation</div>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: '#ffec40' }}>
-                <span className="text-xs font-bold" style={{ color: '#121212' }}>✓</span>
+              <div className="w-6 h-6 bg-[#16b6bb] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-xs font-bold">✓</span>
               </div>
               <div>
                 <div className="font-semibold mb-1">Real-time telemetry</div>
-                <div className="text-sm" style={{ color: '#fffbe0' }}>24/7 temperature monitoring with instant alerts</div>
+                <div className="text-sm text-[#befcfe]">24/7 temperature monitoring with instant alerts</div>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: '#ffec40' }}>
-                <span className="text-xs font-bold" style={{ color: '#121212' }}>✓</span>
+              <div className="w-6 h-6 bg-[#16b6bb] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-xs font-bold">✓</span>
               </div>
               <div>
                 <div className="font-semibold mb-1">Compliance automation</div>
-                <div className="text-sm" style={{ color: '#fffbe0' }}>Automated documentation and audit trails</div>
+                <div className="text-sm text-[#befcfe]">Automated documentation and audit trails</div>
               </div>
             </div>
           </div>
