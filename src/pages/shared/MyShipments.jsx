@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plane, Ship, Truck, Brain as Train, Search, FileDown, ArrowRight, AlertCircle, Play } from 'lucide-react';
+import { Plane, Ship, Truck, Brain as Train, Search, FileDown, ArrowRight, AlertCircle } from 'lucide-react';
 import { ComposableMap, Geographies, Geography, Line, Marker, ZoomableGroup } from 'react-simple-maps';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
@@ -399,16 +399,6 @@ export default function MyShipments() {
                   >
                     Track
                     <ArrowRight className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate('/replay/' + shipment.id);
-                    }}
-                    title="Replay Journey"
-                    className="p-1.5 text-muted hover:text-accent hover:bg-accent/10 rounded-lg transition-colors"
-                  >
-                    <Play className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => handleDownloadDocs(shipment.id)}

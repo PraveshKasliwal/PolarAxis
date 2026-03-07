@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Package, CheckCircle, Clock, AlertTriangle, FileText, Play } from 'lucide-react';
+import { Package, CheckCircle, Clock, AlertTriangle, FileText } from 'lucide-react';
 import KPICard from '../../components/shared/KPICard';
 import StatusPill from '../../components/shared/StatusPill';
 import TempPill from '../../components/shared/TempPill';
@@ -211,7 +211,6 @@ export default function OpsDashboard() {
                   <th className="pb-3 text-xs font-semibold text-secondary uppercase">Temp</th>
                   <th className="pb-3 text-xs font-semibold text-secondary uppercase">Status</th>
                   <th className="pb-3 text-xs font-semibold text-secondary uppercase">Risk</th>
-                  <th className="pb-3 text-xs font-semibold text-secondary uppercase"></th>
                 </tr>
               </thead>
               <tbody>
@@ -238,18 +237,6 @@ export default function OpsDashboard() {
                     </td>
                     <td className="py-3">
                       <RiskBadge level={shipment.riskLevel} showIcon={false} />
-                    </td>
-                    <td className="py-3">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate('/replay/' + shipment.id);
-                        }}
-                        title="Replay Journey"
-                        className="p-1.5 text-muted hover:text-accent hover:bg-accent/10 rounded-lg transition-colors"
-                      >
-                        <Play className="w-4 h-4" />
-                      </button>
                     </td>
                   </motion.tr>
                 ))}

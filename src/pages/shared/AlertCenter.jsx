@@ -1,15 +1,13 @@
 import { motion } from 'framer-motion';
-import { AlertTriangle, CheckCircle, XCircle, Info, Phone, FileText, Truck, ArrowRight, Play } from 'lucide-react';
+import { AlertTriangle, CheckCircle, XCircle, Info, Phone, FileText, Truck, ArrowRight } from 'lucide-react';
 import { alerts as initialAlerts } from '../../data/alerts';
 import { useAuth } from '../../context/AuthContext';
 import { useState } from 'react';
 import Modal from '../../components/shared/Modal';
 import { useToast } from '../../context/ToastContext';
-import { useNavigate } from 'react-router-dom';
 
 export default function AlertCenter() {
   const { currentUser } = useAuth();
-  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('all');
   const [alerts, setAlerts] = useState(initialAlerts);
   const [selectedAlert, setSelectedAlert] = useState(null);
@@ -169,18 +167,7 @@ export default function AlertCenter() {
                   <p className="text-secondary mb-3">{alert.description}</p>
                   <div className="flex items-center gap-4 text-sm">
                     {alert.shipmentId && (
-                      <div className="flex flex-col gap-1">
-                        <span className="text-muted">Shipment: <span className="font-mono text-primary">{alert.shipmentId}</span></span>
-                        {alert.category === 'temperature' && alert.shipmentId && (
-                          <button
-                            onClick={() => navigate('/replay/' + alert.shipmentId)}
-                            className="text-xs text-accent hover:underline flex items-center gap-1"
-                          >
-                            <Play className="w-3 h-3" />
-                            Replay at excursion point
-                          </button>
-                        )}
-                      </div>
+                      <span className="text-muted">Shipment: <span className="font-mono text-primary">{alert.shipmentId}</span></span>
                     )}
                     <span className="text-muted">Location: {alert.location}</span>
                   </div>

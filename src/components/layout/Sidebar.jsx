@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LayoutDashboard, Package, Plane, Ship, Brain as Train, Truck, Archive, Users, MapPin, FileText, AlertCircle, BarChart3, Leaf, Settings, ShoppingCart, Building2, ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { LayoutDashboard, Package, Plane, Ship, Brain as Train, Truck, Archive, Users, MapPin, FileText, AlertCircle, BarChart3, Leaf, Settings, ShoppingCart, Building2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useState } from 'react';
 
@@ -27,7 +27,6 @@ const opsNavigation = [
     items: [
       { name: 'Inventory', path: '/inventory', icon: Archive },
       { name: 'Cold Storage', path: '/cold-storage', icon: MapPin },
-      { name: 'Shipment Replay', path: '/replay/PX-2024-0891', icon: Play },
       { name: 'Tenants', path: '/admin/tenants', icon: Building2 }
     ]
   },
