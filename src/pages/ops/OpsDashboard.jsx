@@ -1,12 +1,14 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Package, CheckCircle, Clock, AlertTriangle, FileText } from 'lucide-react';
 import KPICard from '../../components/shared/KPICard';
 import StatusPill from '../../components/shared/StatusPill';
 import TempPill from '../../components/shared/TempPill';
 import RiskBadge from '../../components/shared/RiskBadge';
+import TenantBadge from '../../components/shared/TenantBadge';
 import { shipments } from '../../data/shipments';
 import { alerts } from '../../data/alerts';
 import { carriers } from '../../data/carriers';
+import { tenants } from '../../data/tenants';
 import { useNavigate } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography, Line, Marker, ZoomableGroup } from 'react-simple-maps';
 import { useState } from 'react';
@@ -19,6 +21,8 @@ export default function OpsDashboard() {
   const [filter, setFilter] = useState('all');
   const [position, setPosition] = useState({ coordinates: [0, 20], zoom: 1 });
   const [isDragging, setIsDragging] = useState(false);
+  const [selectedShipment, setSelectedShipment] = useState(null);
+  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
 
   function handleMoveEnd(position) {
     setPosition(position);
@@ -127,7 +131,7 @@ export default function OpsDashboard() {
           </div>
         </div>
         <div className="relative h-[500px] bg-background" style={{ cursor: isDragging ? 'grabbing' : 'grab' }}>
-          <ComposableMap projection="geoMercator" projectionConfig={{ scale: 140 }}>
+          <ComposableMap projection="geoMercator" projectionConfig={{ scale: 140 }} onClick={() => setSelectedShipment(null)}>
             <ZoomableGroup
               zoom={position.zoom}
               center={position.coordinates}
@@ -161,7 +165,17 @@ export default function OpsDashboard() {
                     opacity={0.8}
                   />
                   <Marker coordinates={[shipment.origin.lng, shipment.origin.lat]}>
-                    <circle r={5} fill={getModeColor(shipment.mode)} />
+                    <circle
+                      r={5}
+                      fill={getModeColor(shipment.mode)}
+                      className="transition-transform hover:scale-150"
+                      style={{ cursor: 'pointer' }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedShipment(shipment);
+                        setPopupPosition({ x: e.clientX, y: e.clientY });
+                      }}
+                    />
                   </Marker>
                   <Marker coordinates={[shipment.destination.lng, shipment.destination.lat]}>
                     <circle r={5} fill={getModeColor(shipment.mode)} opacity={0.6} />
@@ -170,6 +184,95 @@ export default function OpsDashboard() {
               ))}
             </ZoomableGroup>
           </ComposableMap>
+          <AnimatePresence>
+            {selectedShipment && (
+              <motion.div
+                key={selectedShipment.id}
+                initial={{ opacity: 0, scale: 0.9, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.15 }}
+                className="absolute z-50 w-72 bg-surface border border-border rounded-xl shadow-2xl p-4"
+                style={{
+                  left: popupPosition.x + 12,
+                  top: popupPosition.y - 60,
+                  transform: 'translate(-50%, -100%)',
+                  pointerEvents: 'auto'
+                }}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono font-bold text-accent">
+                        {selectedShipment.id}
+                      </span>
+                      <StatusPill status={selectedShipment.status} />
+                    </div>
+                    <p className="text-sm font-semibold text-primary mt-1">
+                      {selectedShipment.material || selectedShipment.description}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setSelectedShipment(null)}
+                    className="text-muted hover:text-primary text-lg leading-none ml-2 flex-shrink-0"
+                  >
+                    ×
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="text-xs text-secondary font-medium truncate">
+                    {selectedShipment.origin.code}
+                  </div>
+                  <div className="flex-1 h-px bg-border relative">
+                    <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 -translate-y-1/2 top-1/2">
+                      {selectedShipment.mode === 'air' ? '✈️' :
+                       selectedShipment.mode === 'sea' ? '🚢' :
+                       selectedShipment.mode === 'rail' ? '🚂' : '🚛'}
+                    </div>
+                  </div>
+                  <div className="text-xs text-secondary font-medium truncate">
+                    {selectedShipment.destination.code}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2 mb-3">
+                  <div className="bg-background rounded-lg p-2 text-center">
+                    <div className="text-xs text-muted mb-0.5">Temp</div>
+                    <TempPill tempClass={selectedShipment.tempClass} />
+                  </div>
+                  <div className="bg-background rounded-lg p-2 text-center">
+                    <div className="text-xs text-muted mb-0.5">Risk</div>
+                    <RiskBadge level={selectedShipment.riskLevel} />
+                  </div>
+                  <div className="bg-background rounded-lg p-2 text-center">
+                    <div className="text-xs text-muted mb-0.5">ETA</div>
+                    <div className="text-xs font-semibold text-primary">
+                      {new Date(selectedShipment.eta).toLocaleDateString('en-US', {
+                        month: 'short', day: 'numeric'
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-2 border-t border-border">
+                  <div className="flex items-center gap-1.5">
+                    <TenantBadge tenant={
+                      tenants.find(t => t.id === selectedShipment.tenantId)
+                    } />
+                  </div>
+                  <button
+                    onClick={() => {
+                      navigate('/shipments/track/' + selectedShipment.id);
+                    }}
+                    className="text-xs text-accent hover:underline font-medium"
+                  >
+                    View Details →
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
           <div className="absolute bottom-3 right-3 flex flex-col gap-1">
             <button
               onClick={() => setPosition(pos => ({ ...pos, zoom: Math.min(pos.zoom * 1.5, 8) }))}
