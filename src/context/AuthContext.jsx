@@ -18,11 +18,10 @@ export function AuthProvider({ children }) {
     }
   }, [currentUser]);
 
-  const login = (email, password, tenantId) => {
+  const login = (email, password) => {
     const user = users.find(u =>
       u.email === email &&
-      u.password === password &&
-      u.tenantId === tenantId
+      u.password === password
     );
 
     if (user) {

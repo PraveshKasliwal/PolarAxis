@@ -4,13 +4,12 @@ import { Package, Globe, TrendingUp } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import ThemeToggle from '../../components/shared/ThemeToggle';
-import { tenants } from '../../data/tenants';
 import { useToast } from '../../context/ToastContext';
+import { users } from '../../data/users';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [tenantId, setTenantId] = useState('');
   const [stats, setStats] = useState({ shipments: 0, compliance: 0, countries: 0 });
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -42,16 +41,17 @@ export default function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!email || !password || !tenantId) {
+    if (!email || !password) {
       toast.error('Please fill in all fields');
       return;
     }
 
-    const success = login(email, password, tenantId);
+    const success = login(email, password);
 
     if (success) {
       toast.success('Login successful');
-      if (tenantId === 'ops') {
+      const loggedUser = users.find(u => u.email === email);
+      if (loggedUser?.tenantId === 'ops') {
         navigate('/ops/dashboard');
       } else {
         navigate('/client/dashboard');
@@ -106,24 +106,6 @@ export default function LoginPage() {
                 placeholder="••••••••"
                 className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-primary placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent/50"
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-secondary mb-2">
-                Organization
-              </label>
-              <select
-                value={tenantId}
-                onChange={(e) => setTenantId(e.target.value)}
-                className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-primary focus:outline-none focus:ring-2 focus:ring-accent/50"
-              >
-                <option value="">Select organization...</option>
-                {tenants.map((tenant) => (
-                  <option key={tenant.id} value={tenant.id}>
-                    {tenant.name} {tenant.id !== 'ops' && `(${tenant.plan})`}
-                  </option>
-                ))}
-              </select>
             </div>
 
             <button

@@ -13,12 +13,38 @@ export default function TenantManagement() {
   const [selectedTenant, setSelectedTenant] = useState(null);
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [inviteForm, setInviteForm] = useState({
-    name: '', email: '', role: 'client_user', tenantId: ''
+    name: '', email: '', role: 'client_user',
+    companyName: '', tenantId: ''
   });
+  const [companySuggestions, setCompanySuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [inviteLink, setInviteLink] = useState('');
   const toast = useToast();
 
   setTimeout(() => setLoading(false), 400);
+
+  const handleCompanyInput = (value) => {
+    setInviteForm(p => ({ ...p, companyName: value, tenantId: '' }));
+    if (value.length > 0) {
+      const filtered = tenants
+        .filter(t => t.id !== 'ops' &&
+          t.name.toLowerCase().includes(value.toLowerCase())
+        );
+      setCompanySuggestions(filtered);
+      setShowSuggestions(true);
+    } else {
+      setShowSuggestions(false);
+    }
+  };
+
+  const selectCompany = (tenant) => {
+    setInviteForm(p => ({
+      ...p,
+      companyName: tenant.name,
+      tenantId: tenant.id
+    }));
+    setShowSuggestions(false);
+  };
 
   const tenantsWithStats = tenants.map(tenant => ({
     ...tenant,
@@ -222,18 +248,58 @@ export default function TenantManagement() {
                     <option value="logistics_coordinator">Logistics Coordinator</option>
                   </select>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-secondary mb-1.5">Organization</label>
-                  <select
-                    value={inviteForm.tenantId}
-                    onChange={e => setInviteForm(p => ({ ...p, tenantId: e.target.value }))}
+                <div className="relative">
+                  <label className="block text-sm font-medium text-secondary mb-1.5">
+                    Organization
+                  </label>
+                  <input
+                    type="text"
+                    value={inviteForm.companyName}
+                    onChange={e => handleCompanyInput(e.target.value)}
+                    onFocus={() => inviteForm.companyName && setShowSuggestions(true)}
+                    onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
+                    placeholder="Type company name..."
                     className="w-full px-4 py-2.5 bg-background border border-border rounded-lg text-primary text-sm focus:outline-none focus:ring-2 focus:ring-accent/50"
-                  >
-                    <option value="">Select organization...</option>
-                    {tenants.filter(t => t.id !== 'ops').map(t => (
-                      <option key={t.id} value={t.id}>{t.name}</option>
-                    ))}
-                  </select>
+                  />
+                  {showSuggestions && (
+                    <div className="absolute z-50 w-full mt-1 bg-surface border border-border rounded-lg shadow-lg overflow-hidden">
+                      {companySuggestions.length > 0 ? (
+                        companySuggestions.map(t => (
+                          <button
+                            key={t.id}
+                            type="button"
+                            onMouseDown={() => selectCompany(t)}
+                            className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-accent/5 text-left transition-colors"
+                          >
+                            <div>
+                              <div className="text-sm font-medium text-primary">{t.name}</div>
+                              <div className="text-xs text-muted">{t.industry}</div>
+                            </div>
+                            <span className="text-xs text-accent font-medium">{t.plan}</span>
+                          </button>
+                        ))
+                      ) : (
+                        <div className="px-4 py-3">
+                          <div className="text-sm text-primary font-medium">
+                            + Create "{inviteForm.companyName}"
+                          </div>
+                          <div className="text-xs text-muted mt-0.5">
+                            New organization will be created
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  {inviteForm.tenantId && (
+                    <p className="text-xs text-success mt-1">
+                      ✓ Existing organization selected
+                    </p>
+                  )}
+                  {inviteForm.companyName && !inviteForm.tenantId && (
+                    <p className="text-xs text-accent mt-1">
+                      ✦ New organization will be created on invite acceptance
+                    </p>
+                  )}
                 </div>
                 <div className="flex gap-3 pt-2">
                   <button
@@ -244,19 +310,23 @@ export default function TenantManagement() {
                   </button>
                   <button
                     onClick={() => {
-                      if (!inviteForm.name || !inviteForm.email || !inviteForm.tenantId) {
+                      if (!inviteForm.name || !inviteForm.email || !inviteForm.companyName) {
                         toast.error('Please fill in all fields');
                         return;
                       }
-                      const tenant = tenants.find(t => t.id === inviteForm.tenantId);
+                      const tenant = inviteForm.tenantId
+                        ? tenants.find(t => t.id === inviteForm.tenantId)
+                        : { name: inviteForm.companyName };
+                      const resolvedTenantId = inviteForm.tenantId ||
+                        ('tenant-' + Date.now());
                       const token = 'INVITE-' + Math.random().toString(36).substring(2, 10).toUpperCase();
                       const newInvite = {
                         token,
                         email: inviteForm.email,
                         name: inviteForm.name,
                         role: inviteForm.role,
-                        tenantId: inviteForm.tenantId,
-                        tenantName: tenant?.name || '',
+                        tenantId: resolvedTenantId,
+                        tenantName: tenant?.name || inviteForm.companyName,
                         invitedBy: 'ops@polaraxis.com',
                         createdAt: new Date().toISOString(),
                         expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
@@ -299,7 +369,7 @@ export default function TenantManagement() {
                 <button
                   onClick={() => {
                     setShowInviteModal(false);
-                    setInviteForm({ name: '', email: '', role: 'client_user', tenantId: '' });
+                    setInviteForm({ name: '', email: '', role: 'client_user', companyName: '', tenantId: '' });
                     setInviteLink('');
                   }}
                   className="w-full py-2.5 border border-border text-secondary hover:text-primary rounded-lg text-sm transition-colors"
