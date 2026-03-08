@@ -1,17 +1,15 @@
-import { Search, Bell, User, LogOut, Shield, Users } from 'lucide-react';
+import { Search, Bell, User, LogOut, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from '../shared/ThemeToggle';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { alerts } from '../../data/alerts';
-import { users } from '../../data/users';
 import { useState } from 'react';
 
 export default function TopBar() {
   const { currentUser, logout, login } = useAuth();
   const navigate = useNavigate();
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [showRoleSwitcher, setShowRoleSwitcher] = useState(false);
 
   const unreadAlerts = alerts.filter(a =>
     !a.acknowledged &&
@@ -22,25 +20,6 @@ export default function TopBar() {
     logout();
     navigate('/login');
   };
-
-  const handleRoleSwitch = (demoUser) => {
-    login(demoUser.email, demoUser.password, demoUser.tenantId);
-    setShowRoleSwitcher(false);
-
-    if (demoUser.role.includes('operations')) {
-      navigate('/ops/dashboard');
-    } else {
-      navigate('/client/dashboard');
-    }
-  };
-
-  const demoUsers = [
-    { label: 'Operations Admin', user: users.find(u => u.role === 'operations_admin') },
-    { label: 'Logistics Coordinator', user: users.find(u => u.role === 'logistics_coordinator') },
-    { label: 'Client Admin', user: users.find(u => u.role === 'client_admin' && u.tenantId === 'tenant-1') },
-    { label: 'Client User', user: users.find(u => u.role === 'client_user' && u.tenantId === 'tenant-1') },
-    { label: 'Compliance Auditor', user: users.find(u => u.role === 'compliance_auditor') }
-  ];
 
   return (
     <motion.header
@@ -65,46 +44,6 @@ export default function TopBar() {
           <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">
             Tenant Isolated Session
           </span>
-        </div>
-
-        <div className="relative">
-          <button
-            onClick={() => setShowRoleSwitcher(!showRoleSwitcher)}
-            className="flex items-center gap-2 px-3 py-1.5 bg-surface border border-border rounded-lg hover:bg-border transition-colors"
-          >
-            <Users className="w-4 h-4 text-secondary" />
-            <span className="text-xs text-secondary">Demo Mode</span>
-          </button>
-
-          {showRoleSwitcher && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: -10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              className="absolute right-0 mt-2 w-64 bg-surface border border-border rounded-xl shadow-2xl overflow-hidden"
-            >
-              <div className="p-3 border-b border-border">
-                <div className="text-xs font-semibold text-secondary uppercase">Switch Role</div>
-              </div>
-              <div className="p-2">
-                {demoUsers.map((item) => (
-                  <button
-                    key={item.label}
-                    onClick={() => handleRoleSwitch(item.user)}
-                    className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors ${
-                      currentUser?.id === item.user?.id
-                        ? 'bg-accent text-white'
-                        : 'text-secondary hover:bg-border hover:text-primary'
-                    }`}
-                  >
-                    <span>{item.label}</span>
-                    {currentUser?.id === item.user?.id && (
-                      <span className="text-xs">✓</span>
-                    )}
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          )}
         </div>
 
         <button

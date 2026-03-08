@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Package, Globe, TrendingUp, User, Building } from 'lucide-react';
+import { Package, Globe, TrendingUp } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import ThemeToggle from '../../components/shared/ThemeToggle';
 import { tenants } from '../../data/tenants';
-import { users } from '../../data/users';
 import { useToast } from '../../context/ToastContext';
 
 export default function LoginPage() {
@@ -59,41 +58,6 @@ export default function LoginPage() {
       }
     } else {
       toast.error('Invalid credentials');
-    }
-  };
-
-  const handleDemoLogin = (role) => {
-    let demoUser;
-    switch (role) {
-      case 'operations':
-        demoUser = users.find(u => u.role === 'operations_admin');
-        break;
-      case 'client':
-        demoUser = users.find(u => u.role === 'client_user' && u.tenantId === 'tenant-1');
-        break;
-      case 'auditor':
-        demoUser = users.find(u => u.role === 'compliance_auditor');
-        break;
-      default:
-        return;
-    }
-
-    if (demoUser) {
-      setEmail(demoUser.email);
-      setPassword(demoUser.password);
-      setTenantId(demoUser.tenantId);
-
-      setTimeout(() => {
-        const success = login(demoUser.email, demoUser.password, demoUser.tenantId);
-        if (success) {
-          toast.success('Demo login successful');
-          if (demoUser.tenantId === 'ops') {
-            navigate('/ops/dashboard');
-          } else {
-            navigate('/client/dashboard');
-          }
-        }
-      }, 300);
     }
   };
 
@@ -162,49 +126,6 @@ export default function LoginPage() {
                   </option>
                 ))}
               </select>
-            </div>
-
-            <div className="space-y-2">
-              <div className="text-xs font-semibold text-secondary uppercase mb-3">Quick Demo Login</div>
-              <button
-                type="button"
-                onClick={() => handleDemoLogin('operations')}
-                className="w-full flex items-center gap-3 px-4 py-3 bg-[#16b6bb]/10 hover:bg-[#16b6bb]/20 border border-sky-500/30 rounded-lg text-left transition-colors group"
-              >
-                <div className="w-10 h-10 bg-[#16b6bb] rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Building className="w-5 h-5 text-white" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-sm font-semibold text-primary">Login as Operations Admin</div>
-                  <div className="text-xs text-secondary">View all shipments and analytics</div>
-                </div>
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDemoLogin('client')}
-                className="w-full flex items-center gap-3 px-4 py-3 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-lg text-left transition-colors group"
-              >
-                <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <User className="w-5 h-5 text-white" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-sm font-semibold text-primary">Login as Client User</div>
-                  <div className="text-xs text-secondary">NovaBio Pharma dashboard</div>
-                </div>
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDemoLogin('auditor')}
-                className="w-full flex items-center gap-3 px-4 py-3 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-lg text-left transition-colors group"
-              >
-                <div className="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Package className="w-5 h-5 text-white" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-sm font-semibold text-primary">Login as Compliance Auditor</div>
-                  <div className="text-xs text-secondary">Compliance and documentation</div>
-                </div>
-              </button>
             </div>
 
             <button
