@@ -1,14 +1,22 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Building2, Users, Package, HardDrive } from 'lucide-react';
+import { Building2, Users, Package, HardDrive, UserPlus, Copy, Check } from 'lucide-react';
 import { tenants } from '../../data/tenants';
 import { shipments } from '../../data/shipments';
 import { users } from '../../data/users';
+import { addInvite } from '../../data/invites';
+import { useToast } from '../../context/ToastContext';
 import LoadingSkeleton from '../../components/shared/LoadingSkeleton';
 
 export default function TenantManagement() {
   const [loading, setLoading] = useState(true);
   const [selectedTenant, setSelectedTenant] = useState(null);
+  const [showInviteModal, setShowInviteModal] = useState(false);
+  const [inviteForm, setInviteForm] = useState({
+    name: '', email: '', role: 'client_user', tenantId: ''
+  });
+  const [inviteLink, setInviteLink] = useState('');
+  const toast = useToast();
 
   setTimeout(() => setLoading(false), 400);
 
@@ -25,15 +33,24 @@ export default function TenantManagement() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <motion.h1
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-3xl font-bold text-primary mb-2"
+      <div className="flex items-start justify-between">
+        <div>
+          <motion.h1
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-3xl font-bold text-primary mb-2"
+          >
+            Tenant Management
+          </motion.h1>
+          <p className="text-secondary">Manage organizations and monitor usage</p>
+        </div>
+        <button
+          onClick={() => { setShowInviteModal(true); setInviteLink(''); }}
+          className="flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent-dark transition-colors text-sm font-medium"
         >
-          Tenant Management
-        </motion.h1>
-        <p className="text-secondary">Manage organizations and monitor usage</p>
+          <UserPlus className="w-4 h-4" />
+          Invite User
+        </button>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
@@ -157,6 +174,143 @@ export default function TenantManagement() {
           )}
         </div>
       </div>
+
+      {showInviteModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-surface border border-border rounded-2xl p-6 w-full max-w-md shadow-2xl"
+          >
+            <h3 className="text-lg font-semibold text-primary mb-1">Invite New User</h3>
+            <p className="text-sm text-secondary mb-6">
+              Generate an invite link. The user will set their own password.
+            </p>
+
+            {!inviteLink ? (
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-secondary mb-1.5">Full Name</label>
+                  <input
+                    type="text"
+                    value={inviteForm.name}
+                    onChange={e => setInviteForm(p => ({ ...p, name: e.target.value }))}
+                    placeholder="Dr. Jane Smith"
+                    className="w-full px-4 py-2.5 bg-background border border-border rounded-lg text-primary text-sm focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-secondary mb-1.5">Work Email</label>
+                  <input
+                    type="email"
+                    value={inviteForm.email}
+                    onChange={e => setInviteForm(p => ({ ...p, email: e.target.value }))}
+                    placeholder="jane@company.com"
+                    className="w-full px-4 py-2.5 bg-background border border-border rounded-lg text-primary text-sm focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-secondary mb-1.5">Role</label>
+                  <select
+                    value={inviteForm.role}
+                    onChange={e => setInviteForm(p => ({ ...p, role: e.target.value }))}
+                    className="w-full px-4 py-2.5 bg-background border border-border rounded-lg text-primary text-sm focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  >
+                    <option value="client_user">Client User</option>
+                    <option value="client_admin">Client Admin</option>
+                    <option value="compliance_auditor">Compliance Auditor</option>
+                    <option value="logistics_coordinator">Logistics Coordinator</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-secondary mb-1.5">Organization</label>
+                  <select
+                    value={inviteForm.tenantId}
+                    onChange={e => setInviteForm(p => ({ ...p, tenantId: e.target.value }))}
+                    className="w-full px-4 py-2.5 bg-background border border-border rounded-lg text-primary text-sm focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  >
+                    <option value="">Select organization...</option>
+                    {tenants.filter(t => t.id !== 'ops').map(t => (
+                      <option key={t.id} value={t.id}>{t.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="flex gap-3 pt-2">
+                  <button
+                    onClick={() => setShowInviteModal(false)}
+                    className="flex-1 py-2.5 border border-border text-secondary hover:text-primary rounded-lg text-sm transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (!inviteForm.name || !inviteForm.email || !inviteForm.tenantId) {
+                        toast.error('Please fill in all fields');
+                        return;
+                      }
+                      const tenant = tenants.find(t => t.id === inviteForm.tenantId);
+                      const token = 'INVITE-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+                      const newInvite = {
+                        token,
+                        email: inviteForm.email,
+                        name: inviteForm.name,
+                        role: inviteForm.role,
+                        tenantId: inviteForm.tenantId,
+                        tenantName: tenant?.name || '',
+                        invitedBy: 'ops@polaraxis.com',
+                        createdAt: new Date().toISOString(),
+                        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+                        status: 'pending'
+                      };
+                      addInvite(newInvite);
+                      const link = window.location.origin + '/register?token=' + token;
+                      setInviteLink(link);
+                      toast.success('Invite created successfully');
+                    }}
+                    className="flex-1 py-2.5 bg-accent hover:bg-accent-dark text-white font-semibold rounded-lg text-sm transition-colors"
+                  >
+                    Generate Invite Link
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div className="bg-success/8 border border-success/25 rounded-xl p-4 text-center">
+                  <Check className="w-8 h-8 text-success mx-auto mb-2" />
+                  <p className="text-sm font-semibold text-primary">Invite link generated!</p>
+                  <p className="text-xs text-secondary mt-1">
+                    Send this link to <span className="font-medium">{inviteForm.email}</span>.
+                    Expires in 30 days.
+                  </p>
+                </div>
+                <div className="bg-background border border-border rounded-lg p-3">
+                  <p className="text-xs text-muted mb-2 font-mono break-all">{inviteLink}</p>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(inviteLink);
+                      toast.success('Link copied to clipboard');
+                    }}
+                    className="w-full flex items-center justify-center gap-2 py-2 bg-accent/10 hover:bg-accent/20 text-accent rounded-lg text-sm font-medium transition-colors"
+                  >
+                    <Copy className="w-4 h-4" />
+                    Copy Link
+                  </button>
+                </div>
+                <button
+                  onClick={() => {
+                    setShowInviteModal(false);
+                    setInviteForm({ name: '', email: '', role: 'client_user', tenantId: '' });
+                    setInviteLink('');
+                  }}
+                  className="w-full py-2.5 border border-border text-secondary hover:text-primary rounded-lg text-sm transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            )}
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }

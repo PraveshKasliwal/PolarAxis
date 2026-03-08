@@ -5,6 +5,7 @@ import { ToastProvider } from './context/ToastContext';
 import AppShell from './components/layout/AppShell';
 import LandingPage from './pages/landing/LandingPage';
 import LoginPage from './pages/auth/LoginPage';
+import RegisterPage from './pages/auth/RegisterPage';
 import ClientDashboard from './pages/client/ClientDashboard';
 import OpsDashboard from './pages/ops/OpsDashboard';
 import ShipmentTracking from './pages/shared/ShipmentTracking';
@@ -34,6 +35,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
       <Route
         path="/client/dashboard"
