@@ -136,153 +136,175 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <section className="bg-white pt-20 pb-24 px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="inline-block mb-6 px-4 py-1.5 rounded-full text-xs font-medium border"
-            style={{ backgroundColor: '#eaf9f9', color: '#008086', borderColor: '#cceced' }}
-          >
-            Pharmaceutical Cold Chain Platform
-          </motion.div>
+      <section
+        className="relative pt-20 pb-24 px-6 overflow-hidden"
+        style={{ minHeight: '100vh' }}
+      >
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: 'url(/WhatsApp_Image_2026-03-08_at_10.34.43_AM.jpeg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
 
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="font-bold leading-tight mb-6"
-            style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: '#0d2b2c' }}
-          >
-            Ship pharmaceuticals with{' '}
-            <span style={{ color: '#16b6bb' }}>temperature certainty.</span>
-          </motion.h1>
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.82) 0%, rgba(244,254,254,0.75) 40%, rgba(190,252,254,0.5) 100%)'
+          }}
+        />
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            className="font-normal text-lg leading-relaxed mb-10 max-w-2xl mx-auto"
-            style={{ color: '#3d6b6c' }}
-          >
-            Real-time cold chain monitoring, AI-powered routing, and automated compliance for global pharmaceutical logistics.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-            className="flex gap-3 justify-center"
-          >
-            <button
-              onClick={() => navigate('/login')}
-              className="px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors shadow-sm"
-              style={{ backgroundColor: '#16b6bb', color: 'white' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#008086'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#16b6bb'}
+        <div className="relative z-10">
+          <div className="max-w-5xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="inline-block mb-6 px-4 py-1.5 rounded-full text-xs font-medium border"
+              style={{ backgroundColor: '#eaf9f9', color: '#008086', borderColor: '#cceced' }}
             >
-              Get Started
-            </button>
-            <button
-              onClick={() => navigate('/login')}
-              className="px-7 py-3.5 rounded-lg font-medium text-sm bg-white border transition-colors"
-              style={{ borderColor: '#cceced', color: '#3d6b6c' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#16b6bb';
-                e.currentTarget.style.color = '#0d2b2c';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#cceced';
-                e.currentTarget.style.color = '#3d6b6c';
-              }}
+              Pharmaceutical Cold Chain Platform
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="font-bold leading-tight mb-6"
+              style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: '#0d2b2c' }}
             >
-              Request a Demo
-            </button>
-          </motion.div>
+              Ship pharmaceuticals with{' '}
+              <span style={{ color: '#16b6bb' }}>temperature certainty.</span>
+            </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-16 border rounded-2xl overflow-hidden shadow-xl max-w-4xl mx-auto"
-            style={{ borderColor: '#cceced', boxShadow: '0 20px 60px rgba(22, 182, 187, 0.1)' }}
-          >
-            <div className="px-4 py-3 border-b flex items-center gap-2" style={{ backgroundColor: '#eaf9f9', borderColor: '#cceced' }}>
-              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#891f00' }} />
-              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#16b6bb' }} />
-              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#008086' }} />
-              <span className="ml-3 text-xs" style={{ color: '#3d6b6c' }}>PolarAxis Control Tower</span>
-            </div>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="font-normal text-lg leading-relaxed mb-10 max-w-2xl mx-auto"
+              style={{ color: '#3d6b6c' }}
+            >
+              Real-time cold chain monitoring, AI-powered routing, and automated compliance for global pharmaceutical logistics.
+            </motion.p>
 
-            <div className="p-6 grid grid-cols-4 gap-4" style={{ backgroundColor: '#f4fefe' }}>
-              <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
-                <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>247</div>
-                <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Active Shipments</div>
-              </div>
-              <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
-                <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#16b6bb' }}>99.8%</div>
-                <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Temp Compliance</div>
-              </div>
-              <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
-                <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>14</div>
-                <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Countries</div>
-              </div>
-              <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
-                <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#891f00' }}>2</div>
-                <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Excursions</div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              className="flex gap-3 justify-center"
+            >
+              <button
+                onClick={() => navigate('/login')}
+                className="px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors shadow-sm"
+                style={{ backgroundColor: '#16b6bb', color: 'white' }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#008086'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#16b6bb'}
+              >
+                Get Started
+              </button>
+              <button
+                onClick={() => navigate('/login')}
+                className="px-7 py-3.5 rounded-lg font-medium text-sm bg-white border transition-colors"
+                style={{ borderColor: '#cceced', color: '#3d6b6c' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#16b6bb';
+                  e.currentTarget.style.color = '#0d2b2c';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#cceced';
+                  e.currentTarget.style.color = '#3d6b6c';
+                }}
+              >
+                Request a Demo
+              </button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-16 border rounded-2xl overflow-hidden shadow-xl max-w-4xl mx-auto"
+              style={{ borderColor: '#cceced', boxShadow: '0 20px 60px rgba(22, 182, 187, 0.1)' }}
+            >
+              <div className="px-4 py-3 border-b flex items-center gap-2" style={{ backgroundColor: '#eaf9f9', borderColor: '#cceced' }}>
+                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#891f00' }} />
+                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#16b6bb' }} />
+                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#008086' }} />
+                <span className="ml-3 text-xs" style={{ color: '#3d6b6c' }}>PolarAxis Control Tower</span>
               </div>
 
-              <div className="col-span-4 bg-white border rounded-lg overflow-hidden" style={{ borderColor: '#cceced' }}>
-                <div className="px-4 py-2 grid grid-cols-5 gap-2 text-xs font-medium uppercase tracking-wide" style={{ backgroundColor: '#eaf9f9', color: '#7aa8a9' }}>
-                  <div>Shipment ID</div>
-                  <div>Route</div>
-                  <div>Status</div>
-                  <div>Temp</div>
-                  <div>Risk</div>
+              <div className="p-6 grid grid-cols-4 gap-4" style={{ backgroundColor: '#f4fefe' }}>
+                <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
+                  <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>247</div>
+                  <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Active Shipments</div>
                 </div>
-                <div className="px-4 py-3 border-t grid grid-cols-5 gap-2 text-xs" style={{ borderColor: '#cceced' }}>
-                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>PX-2024-0891</div>
-                  <div style={{ color: '#3d6b6c' }}>AMS → BOM</div>
-                  <div>
-                    <span className="px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: '#eaf9f9', color: '#008086' }}>
-                      In Transit
-                    </span>
-                  </div>
-                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#16b6bb' }}>4.2°C</div>
-                  <div>
-                    <span className="px-2 py-0.5 rounded-full text-xs bg-green-50 text-green-700">Low</span>
-                  </div>
+                <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
+                  <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#16b6bb' }}>99.8%</div>
+                  <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Temp Compliance</div>
                 </div>
-                <div className="px-4 py-3 border-t grid grid-cols-5 gap-2 text-xs" style={{ borderColor: '#cceced' }}>
-                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>PX-2024-0887</div>
-                  <div style={{ color: '#3d6b6c' }}>JFK → SIN</div>
-                  <div>
-                    <span className="px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: '#eaf9f9', color: '#008086' }}>
-                      In Transit
-                    </span>
-                  </div>
-                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#16b6bb' }}>-68.4°C</div>
-                  <div>
-                    <span className="px-2 py-0.5 rounded-full text-xs bg-green-50 text-green-700">Low</span>
-                  </div>
+                <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
+                  <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>14</div>
+                  <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Countries</div>
                 </div>
-                <div className="px-4 py-3 border-t grid grid-cols-5 gap-2 text-xs" style={{ borderColor: '#cceced' }}>
-                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>PX-2024-0876</div>
-                  <div style={{ color: '#3d6b6c' }}>CDG → KUL</div>
-                  <div>
-                    <span className="px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: 'rgba(137, 31, 0, 0.1)', color: '#891f00' }}>
-                      Excursion
-                    </span>
+                <div className="bg-white border rounded-lg p-4" style={{ borderColor: '#cceced' }}>
+                  <div className="font-bold text-2xl" style={{ fontFamily: 'JetBrains Mono, monospace', color: '#891f00' }}>2</div>
+                  <div className="text-xs mt-1" style={{ color: '#7aa8a9' }}>Excursions</div>
+                </div>
+
+                <div className="col-span-4 bg-white border rounded-lg overflow-hidden" style={{ borderColor: '#cceced' }}>
+                  <div className="px-4 py-2 grid grid-cols-5 gap-2 text-xs font-medium uppercase tracking-wide" style={{ backgroundColor: '#eaf9f9', color: '#7aa8a9' }}>
+                    <div>Shipment ID</div>
+                    <div>Route</div>
+                    <div>Status</div>
+                    <div>Temp</div>
+                    <div>Risk</div>
                   </div>
-                  <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#891f00' }}>-17.1°C</div>
-                  <div>
-                    <span className="px-2 py-0.5 rounded-full text-xs bg-red-50 text-red-700">High</span>
+                  <div className="px-4 py-3 border-t grid grid-cols-5 gap-2 text-xs" style={{ borderColor: '#cceced' }}>
+                    <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>PX-2024-0891</div>
+                    <div style={{ color: '#3d6b6c' }}>AMS → BOM</div>
+                    <div>
+                      <span className="px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: '#eaf9f9', color: '#008086' }}>
+                        In Transit
+                      </span>
+                    </div>
+                    <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#16b6bb' }}>4.2°C</div>
+                    <div>
+                      <span className="px-2 py-0.5 rounded-full text-xs bg-green-50 text-green-700">Low</span>
+                    </div>
+                  </div>
+                  <div className="px-4 py-3 border-t grid grid-cols-5 gap-2 text-xs" style={{ borderColor: '#cceced' }}>
+                    <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>PX-2024-0887</div>
+                    <div style={{ color: '#3d6b6c' }}>JFK → SIN</div>
+                    <div>
+                      <span className="px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: '#eaf9f9', color: '#008086' }}>
+                        In Transit
+                      </span>
+                    </div>
+                    <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#16b6bb' }}>-68.4°C</div>
+                    <div>
+                      <span className="px-2 py-0.5 rounded-full text-xs bg-green-50 text-green-700">Low</span>
+                    </div>
+                  </div>
+                  <div className="px-4 py-3 border-t grid grid-cols-5 gap-2 text-xs" style={{ borderColor: '#cceced' }}>
+                    <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#0d2b2c' }}>PX-2024-0876</div>
+                    <div style={{ color: '#3d6b6c' }}>CDG → KUL</div>
+                    <div>
+                      <span className="px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: 'rgba(137, 31, 0, 0.1)', color: '#891f00' }}>
+                        Excursion
+                      </span>
+                    </div>
+                    <div style={{ fontFamily: 'JetBrains Mono, monospace', color: '#891f00' }}>-17.1°C</div>
+                    <div>
+                      <span className="px-2 py-0.5 rounded-full text-xs bg-red-50 text-red-700">High</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
